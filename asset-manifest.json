@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/shopping-cart/static/css/main.aea8b365.css",
+    "main.js": "/shopping-cart/static/js/main.5614295d.js",
+    "static/media/Brook.webp": "/shopping-cart/static/media/Brook.cd3c930ddf3ce213b766.webp",
+    "static/media/Luffy.webp": "/shopping-cart/static/media/Luffy.b4cad11d764ce07a8dad.webp",
+    "static/media/Usopp.webp": "/shopping-cart/static/media/Usopp.f209ca3890c3d114dfad.webp",
+    "static/media/Franky.webp": "/shopping-cart/static/media/Franky.e42149ae9e9bf9d64fd0.webp",
+    "static/media/Sanji.webp": "/shopping-cart/static/media/Sanji.56ca07413334c56ee4b5.webp",
+    "static/media/Chopper.webp": "/shopping-cart/static/media/Chopper.bdb79f4cdc0287f833db.webp",
+    "static/media/Jinbe.webp": "/shopping-cart/static/media/Jinbe.6af7ab7a2d5bc9a46720.webp",
+    "static/media/Nami.webp": "/shopping-cart/static/media/Nami.def366e572842d4f14c1.webp",
+    "static/media/Robin.webp": "/shopping-cart/static/media/Robin.f09182f53f3708b724f4.webp",
+    "static/media/Zoro.webp": "/shopping-cart/static/media/Zoro.b3c143d2d033d9f7d533.webp",
+    "index.html": "/shopping-cart/index.html",
+    "static/media/shopping_cart.svg": "/shopping-cart/static/media/shopping_cart.b1b0fa50cd6c5a58f1ae.svg",
+    "static/media/dark_mode.svg": "/shopping-cart/static/media/dark_mode.529b59b2ffef3c7df091.svg",
+    "static/media/delete-icon.svg": "/shopping-cart/static/media/delete-icon.3270f2c93c8c138fa6cc.svg",
+    "main.aea8b365.css.map": "/shopping-cart/static/css/main.aea8b365.css.map",
+    "main.5614295d.js.map": "/shopping-cart/static/js/main.5614295d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.aea8b365.css",
+    "static/js/main.5614295d.js"
+  ]
+}
