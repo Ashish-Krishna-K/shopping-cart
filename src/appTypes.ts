@@ -1,4 +1,4 @@
-interface ApiProductData {
+export interface ApiProductData {
   id: number;
   title: string;
   price: number;
@@ -7,7 +7,17 @@ interface ApiProductData {
   image: string;
 }
 
-interface ApiCategoryData {
+export interface ApiCategoryData {
   id: string;
   name: string;
+}
+
+export type CategorySelectionHandler = (item: ApiCategoryData) => void;
+
+export interface FilterSidebarPropTypes {
+  handleCategorySelection: CategorySelectionHandler;
+}
+
+export interface ProductsDisplayPropTypes {
+  category?: string;
 }
