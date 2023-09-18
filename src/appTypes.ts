@@ -7,4 +7,7 @@ interface ApiProductData {
   image: string;
 }
 
-type ApiCategoryData = string[];
+interface ApiCategoryData {
+  id: string;
+  name: string;
+}
