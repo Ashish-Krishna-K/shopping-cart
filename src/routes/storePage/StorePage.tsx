@@ -1,26 +1,14 @@
-import { useState } from "react";
-import FilterSidebar from "../../components/FilterSidebar";
-import {
-  type ApiCategoryData,
-  type CategorySelectionHandler,
-} from "../../appTypes";
-import ProductsDisplay from "../../components/products/ProductsDisplay";
+import { type ApiCategoryData } from "../../appTypes";
+import FilterSidebar from "../../components/filterSidebar/FilterSidebar";
+import { Outlet, useLoaderData } from "react-router-dom";
 
 const StorePage = () => {
-  const [selectedCategory, setSelectedCategory] = useState<ApiCategoryData>({
-    id: "",
-    name: "",
-  });
-  const handleCategorySelection: CategorySelectionHandler = (
-    item: ApiCategoryData,
-  ) => {
-    setSelectedCategory(item);
-  };
+  const { categories } = useLoaderData() as { categories: ApiCategoryData[] };
   return (
     <>
       <h1>Shop Page</h1>
-      <FilterSidebar handleCategorySelection={handleCategorySelection} />
-      <ProductsDisplay category={selectedCategory.name} />
+      {categories && <FilterSidebar data={categories} />}
+      <Outlet />
     </>
   );
 };

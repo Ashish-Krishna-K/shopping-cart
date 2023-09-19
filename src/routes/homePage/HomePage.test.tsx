@@ -1,11 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import HomePage from "./HomePage";
-import { BrowserRouter } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
 
 describe("Home Page", () => {
   it("Home page is rendered", () => {
-    render(<HomePage />, { wrapper: BrowserRouter });
+    render(<HomePage />, { wrapper: MemoryRouter });
     expect(screen.getByRole("heading").textContent).toMatch(
       /welcome to fake store/i,
     );
@@ -16,7 +16,7 @@ describe("Home Page", () => {
     ).toBeInTheDocument;
   });
   it("Home page should have a link to the shop page", () => {
-    render(<HomePage />, { wrapper: BrowserRouter });
+    render(<HomePage />, { wrapper: MemoryRouter });
     expect(screen.getByRole("link").textContent).toMatch(/shop now/i);
   });
 });

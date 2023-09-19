@@ -18,6 +18,17 @@ export interface FilterSidebarPropTypes {
   handleCategorySelection: CategorySelectionHandler;
 }
 
-export interface ProductsDisplayPropTypes {
-  category?: string;
+export interface ProductsDisplayLoaderTypes {
+  data: ApiProductData[];
+}
+
+export interface CartItem extends ApiProductData {
+  quantity: number;
+}
+
+export interface CartContextType {
+  cart: CartItem[];
+  addCartItem: (newCartItem: CartItem) => void;
+  updateCartItem: (newCartItem: CartItem) => void;
+  deleteCartItem: (itemId: number) => void;
 }
