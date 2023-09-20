@@ -5,6 +5,7 @@ import StorePage from "./storePage/StorePage";
 import { loader as categoryLoader } from "./storePage/StorePageLoader";
 import ProductsDisplay from "../components/products/ProductsDisplay";
 import { loader as productsLoader } from "../components/products/ProductsDisplayLoader";
+import CheckoutPage from "./checkoutPage/CheckoutPage";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -40,7 +41,7 @@ const Router = () => {
         },
         {
           path: "checkout",
-          element: <h1>Checkout</h1>,
+          element: <CheckoutPage />,
         },
       ],
     },
