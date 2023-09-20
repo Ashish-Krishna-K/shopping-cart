@@ -33,6 +33,26 @@ describe("cart component", () => {
     expect(screen.getAllByRole("listitem").length).toBe(fakeCart.length);
     expect(screen.getByText(fakeCart[0].title)).toBeInTheDocument();
   });
+  it("renders cart is empty when cart is empty", async () => {
+    const fakeCart: CartItem[] = [];
+    const addCartItem = vi.fn();
+    const updateCartItem = vi.fn();
+    const deleteCartItem = vi.fn();
+    render(
+      <FakeContextProvider
+        cart={fakeCart}
+        addCartItem={addCartItem}
+        updateCartItem={updateCartItem}
+        deleteCartItem={deleteCartItem}
+      >
+        <Cart />
+      </FakeContextProvider>,
+      {
+        wrapper: MemoryRouter,
+      },
+    );
+    expect(screen.getByText(/cart is empty/i)).toBeInTheDocument();
+  })
   it("renders the item total price correctly", async () => {
     const fakeCart: CartItem[] = fakeProductData.map((item) => {
       return {

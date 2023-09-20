@@ -3,6 +3,7 @@ import { CartContext } from "../../routes/mainLayoutPage/App";
 
 const Cart = () => {
   const { cart, deleteCartItem } = useContext(CartContext)!;
+  if (cart.length < 1) return <p>Cart is empty!</p>;
   return (
     <div>
       <h2>Your Cart: </h2>
