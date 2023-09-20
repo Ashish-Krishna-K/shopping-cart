@@ -1,8 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import {
-  allRouter,
-} from "../../testHelpers";
+import { allRouter } from "../../testHelpers";
 import { RouterProvider } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 
@@ -38,9 +36,7 @@ describe("App/main page of website", () => {
     await user.click(aboutLink);
     expect(screen.getByRole("heading", { name: /about/i })).toBeInTheDocument();
     await user.click(checkoutLink);
-    expect(
-      screen.getByText(/your cart is empty/i),
-    ).toBeInTheDocument();
+    expect(screen.getByText(/your cart is empty/i)).toBeInTheDocument();
     await user.click(homeLink);
     expect(
       screen.getByRole("heading", { name: /welcome to fake store/i }),
@@ -51,12 +47,8 @@ describe("App/main page of website", () => {
     render(<RouterProvider router={allRouter} />);
     const cartBtn = screen.getByRole("button", { name: /cart/i });
     await user.click(cartBtn);
-    expect(
-      screen.getByText("Cart is empty!"),
-    ).toBeInTheDocument();
+    expect(screen.getByText("Cart is empty!")).toBeInTheDocument();
     await user.click(cartBtn);
-    expect(
-      screen.queryByText("Cart is empty!"),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText("Cart is empty!")).not.toBeInTheDocument();
   });
 });

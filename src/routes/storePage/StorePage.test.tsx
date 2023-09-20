@@ -1,4 +1,4 @@
-import { describe, expect, it} from "vitest";
+import { describe, expect, it } from "vitest";
 import { RouterProvider } from "react-router-dom";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -8,7 +8,9 @@ describe("store page", () => {
   it("renders the store page", async () => {
     render(<RouterProvider router={shopRouter} />);
     await waitFor(() => screen.getAllByRole("heading"));
-    expect(screen.getByRole("heading", {level: 1, name: /shop page/i})).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 1, name: /shop page/i }),
+    ).toBeInTheDocument();
   });
   it("clicking on a category will change the contents", async () => {
     const user = userEvent.setup();
