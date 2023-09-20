@@ -1,5 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createMemoryRouter } from "react-router-dom";
+import App from "./routes/mainLayoutPage/App";
+import HomePage from "./routes/homePage/HomePage";
 import StorePage from "./routes/storePage/StorePage";
 import ProductsDisplay from "./components/products/ProductsDisplay";
 import { ReactNode } from "react";
@@ -97,7 +99,56 @@ const fakeProductData: ApiProductData[] = [
   },
 ];
 
-const router = createMemoryRouter(
+const allRouter = createMemoryRouter([
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <h1>Error</h1>,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: "shop",
+        element: <StorePage />,
+        loader: () => {
+          return { categories: fakeCategoryData };
+        },
+        children: [
+          {
+            index: true,
+            element: <ProductsDisplay />,
+            loader: () => {
+              return { data: fakeProductData };
+            },
+          },
+          {
+            path: ":category",
+            element: <ProductsDisplay />,
+            loader: ({ params }) => {
+              return {
+                data: fakeProductData.filter(
+                  (item) => item.category === params.category,
+                ),
+              };
+            },
+          },
+        ],
+      },
+      {
+        path: "about",
+        element: <h1>About</h1>,
+      },
+      {
+        path: "checkout",
+        element: <h1>Checkout</h1>,
+      },
+    ],
+  },
+]);
+
+const shopRouter = createMemoryRouter(
   [
     {
       path: "shop",
@@ -158,8 +209,4 @@ const FakeContextProvider = ({
   );
 };
 
-export {
-  router,
-  FakeContextProvider,
-  fakeProductData
-};
+export { allRouter, shopRouter, FakeContextProvider, fakeProductData };

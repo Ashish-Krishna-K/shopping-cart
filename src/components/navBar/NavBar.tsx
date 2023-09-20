@@ -1,9 +1,14 @@
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { CartContext } from "../../routes/mainLayoutPage/App";
 
-const NavBar = () => {
+const NavBar = ({
+  handleShowCartClick,
+}: {
+  handleShowCartClick: () => void;
+}) => {
   const { cart } = useContext(CartContext)!;
+  const location = useLocation();
   return (
     <nav>
       <ul>
@@ -21,16 +26,14 @@ const NavBar = () => {
         <li>
           <NavLink to={"/checkout"}>Checkout</NavLink>
         </li>
-        <li>
-          <button
-            onClick={() => {
-              console.log("hi");
-            }}
-          >
-            Cart
-            <span>{cart.length}</span>
-          </button>
-        </li>
+        {location.pathname !== "/checkout" && (
+          <li>
+            <button onClick={handleShowCartClick}>
+              Cart
+              <span>{cart.length}</span>
+            </button>
+          </li>
+        )}
       </ul>
     </nav>
   );

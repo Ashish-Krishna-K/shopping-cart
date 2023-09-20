@@ -1,14 +1,24 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { RouterProvider } from "react-router-dom";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { FakeContextProvider, router } from "../../testHelpers";
+import { FakeContextProvider, shopRouter } from "../../testHelpers";
+import { CartItem } from "../../appTypes";
 
 describe("store page", () => {
+  const fakeCart: CartItem[] = [];
+  const addCartItem = vi.fn();
+  const updateCartItem = vi.fn();
+  const deleteCartItem = vi.fn();
   it("renders the store page", async () => {
     render(
-      <FakeContextProvider>
-        <RouterProvider router={router} />
+      <FakeContextProvider
+        cart={fakeCart}
+        addCartItem={addCartItem}
+        updateCartItem={updateCartItem}
+        deleteCartItem={deleteCartItem}
+      >
+        <RouterProvider router={shopRouter} />
       </FakeContextProvider>,
     );
     await waitFor(() => screen.getAllByRole("heading"));
@@ -17,8 +27,13 @@ describe("store page", () => {
   it("clicking on a category will change the contents", async () => {
     const user = userEvent.setup();
     render(
-      <FakeContextProvider>
-        <RouterProvider router={router} />
+      <FakeContextProvider
+        cart={fakeCart}
+        addCartItem={addCartItem}
+        updateCartItem={updateCartItem}
+        deleteCartItem={deleteCartItem}
+      >
+        <RouterProvider router={shopRouter} />
       </FakeContextProvider>,
     );
     await waitFor(() => screen.getAllByRole("link"));
