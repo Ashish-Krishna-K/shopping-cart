@@ -19,6 +19,7 @@ const Cart = () => {
             <h3>{cartItem.title}</h3>
             <p>{cartItem.quantity}</p>
             <p>
+              Item total:
               <strong>{cartItem.quantity * cartItem.price}</strong>
             </p>
             <button

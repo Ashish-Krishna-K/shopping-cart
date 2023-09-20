@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createMemoryRouter } from "react-router-dom";
+import { LoaderFunctionArgs, createMemoryRouter } from "react-router-dom";
 import App from "./routes/mainLayoutPage/App";
 import HomePage from "./routes/homePage/HomePage";
 import StorePage from "./routes/storePage/StorePage";
@@ -8,6 +8,7 @@ import { ReactNode } from "react";
 import { ApiCategoryData, ApiProductData, CartItem } from "./appTypes";
 import { CartContext } from "./routes/mainLayoutPage/App";
 import { Mock } from "vitest";
+import CheckoutPage from "./routes/checkoutPage/CheckoutPage";
 
 const fakeCategoryData: ApiCategoryData[] = [
   {
@@ -99,7 +100,7 @@ const fakeProductData: ApiProductData[] = [
   },
 ];
 
-const allRouter = createMemoryRouter([
+const routes = [
   {
     path: "/",
     element: <App />,
@@ -126,7 +127,7 @@ const allRouter = createMemoryRouter([
           {
             path: ":category",
             element: <ProductsDisplay />,
-            loader: ({ params }) => {
+            loader: ({ params }: LoaderFunctionArgs) => {
               return {
                 data: fakeProductData.filter(
                   (item) => item.category === params.category,
@@ -142,47 +143,23 @@ const allRouter = createMemoryRouter([
       },
       {
         path: "checkout",
-        element: <h1>Checkout</h1>,
+        element: <CheckoutPage />,
       },
     ],
   },
-]);
+];
 
-const shopRouter = createMemoryRouter(
-  [
-    {
-      path: "shop",
-      element: <StorePage />,
-      loader: () => {
-        return { categories: fakeCategoryData };
-      },
-      children: [
-        {
-          index: true,
-          element: <ProductsDisplay />,
-          loader: () => {
-            return { data: fakeProductData };
-          },
-        },
-        {
-          path: ":category",
-          element: <ProductsDisplay />,
-          loader: ({ params }) => {
-            return {
-              data: fakeProductData.filter(
-                (item) => item.category === params.category,
-              ),
-            };
-          },
-        },
-      ],
-    },
-  ],
-  {
-    initialEntries: ["/", "/shop"],
-    initialIndex: 1,
-  },
-);
+const allRouter = createMemoryRouter(routes);
+
+const shopRouter = createMemoryRouter(routes, {
+  initialEntries: ["/", "/shop"],
+  initialIndex: 1,
+});
+
+const checkoutRouter = createMemoryRouter(routes, {
+  initialEntries: ["/", "/checkout"],
+  initialIndex: 1,
+});
 
 interface fakeProps {
   cart: CartItem[];
@@ -209,4 +186,31 @@ const FakeContextProvider = ({
   );
 };
 
-export { allRouter, shopRouter, FakeContextProvider, fakeProductData };
+const returnWithContext = (
+  cart: CartItem[],
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  addFn: Mock<[item: any], number> | (() => void),
+  updateFn: () => void,
+  deleteFn: () => void,
+  children: ReactNode,
+) => {
+  return (
+    <FakeContextProvider
+      cart={cart}
+      addCartItem={addFn}
+      updateCartItem={updateFn}
+      deleteCartItem={deleteFn}
+    >
+      {children}
+    </FakeContextProvider>
+  );
+};
+
+export {
+  allRouter,
+  shopRouter,
+  checkoutRouter,
+  FakeContextProvider,
+  fakeProductData,
+  returnWithContext,
+};

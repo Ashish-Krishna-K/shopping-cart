@@ -1,5 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
-import { FakeContextProvider, fakeProductData } from "../../testHelpers";
+import {
+  FakeContextProvider,
+  fakeProductData,
+  returnWithContext,
+} from "../../testHelpers";
 import { CartItem } from "../../appTypes";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
@@ -7,25 +11,24 @@ import Cart from "./Cart";
 import userEvent from "@testing-library/user-event";
 
 describe("cart component", () => {
+  const fakeCart: CartItem[] = fakeProductData.map((item) => {
+    return {
+      ...item,
+      quantity: Math.floor(Math.random() * 10) + 1,
+    };
+  });
+  const addCartItem = vi.fn();
+  const updateCartItem = vi.fn();
+  const deleteCartItem = vi.fn();
   it("renders a cart display", async () => {
-    const fakeCart: CartItem[] = fakeProductData.map((item) => {
-      return {
-        ...item,
-        quantity: Math.floor(Math.random() * 10) + 1,
-      };
-    });
-    const addCartItem = vi.fn();
-    const updateCartItem = vi.fn();
-    const deleteCartItem = vi.fn();
     render(
-      <FakeContextProvider
-        cart={fakeCart}
-        addCartItem={addCartItem}
-        updateCartItem={updateCartItem}
-        deleteCartItem={deleteCartItem}
-      >
-        <Cart />
-      </FakeContextProvider>,
+      returnWithContext(
+        fakeCart,
+        addCartItem,
+        updateCartItem,
+        deleteCartItem,
+        <Cart />,
+      ),
       {
         wrapper: MemoryRouter,
       },
@@ -34,44 +37,30 @@ describe("cart component", () => {
     expect(screen.getByText(fakeCart[0].title)).toBeInTheDocument();
   });
   it("renders cart is empty when cart is empty", async () => {
-    const fakeCart: CartItem[] = [];
-    const addCartItem = vi.fn();
-    const updateCartItem = vi.fn();
-    const deleteCartItem = vi.fn();
+    const emptyFakeCart: CartItem[] = [];
     render(
-      <FakeContextProvider
-        cart={fakeCart}
-        addCartItem={addCartItem}
-        updateCartItem={updateCartItem}
-        deleteCartItem={deleteCartItem}
-      >
-        <Cart />
-      </FakeContextProvider>,
+      returnWithContext(
+        emptyFakeCart,
+        addCartItem,
+        updateCartItem,
+        deleteCartItem,
+        <Cart />,
+      ),
       {
         wrapper: MemoryRouter,
       },
     );
     expect(screen.getByText(/cart is empty/i)).toBeInTheDocument();
-  })
+  });
   it("renders the item total price correctly", async () => {
-    const fakeCart: CartItem[] = fakeProductData.map((item) => {
-      return {
-        ...item,
-        quantity: Math.floor(Math.random() * 10) + 1,
-      };
-    });
-    const addCartItem = vi.fn();
-    const updateCartItem = vi.fn();
-    const deleteCartItem = vi.fn();
     render(
-      <FakeContextProvider
-        cart={fakeCart}
-        addCartItem={addCartItem}
-        updateCartItem={updateCartItem}
-        deleteCartItem={deleteCartItem}
-      >
-        <Cart />
-      </FakeContextProvider>,
+      returnWithContext(
+        fakeCart,
+        addCartItem,
+        updateCartItem,
+        deleteCartItem,
+        <Cart />,
+      ),
       {
         wrapper: MemoryRouter,
       },
@@ -80,24 +69,14 @@ describe("cart component", () => {
     expect(screen.getAllByText(expectedTotal)[0]).toBeInTheDocument();
   });
   it("renders the cart total price correctly", async () => {
-    const fakeCart: CartItem[] = fakeProductData.map((item) => {
-      return {
-        ...item,
-        quantity: Math.floor(Math.random() * 10) + 1,
-      };
-    });
-    const addCartItem = vi.fn();
-    const updateCartItem = vi.fn();
-    const deleteCartItem = vi.fn();
     render(
-      <FakeContextProvider
-        cart={fakeCart}
-        addCartItem={addCartItem}
-        updateCartItem={updateCartItem}
-        deleteCartItem={deleteCartItem}
-      >
-        <Cart />
-      </FakeContextProvider>,
+      returnWithContext(
+        fakeCart,
+        addCartItem,
+        updateCartItem,
+        deleteCartItem,
+        <Cart />,
+      ),
       {
         wrapper: MemoryRouter,
       },
@@ -109,24 +88,14 @@ describe("cart component", () => {
     expect(screen.getByText(expectedTotal)).toBeInTheDocument();
   });
   it("rendered cart item has a delete button", async () => {
-    const fakeCart: CartItem[] = fakeProductData.map((item) => {
-      return {
-        ...item,
-        quantity: Math.floor(Math.random() * 10) + 1,
-      };
-    });
-    const addCartItem = vi.fn();
-    const updateCartItem = vi.fn();
-    const deleteCartItem = vi.fn();
     render(
-      <FakeContextProvider
-        cart={fakeCart}
-        addCartItem={addCartItem}
-        updateCartItem={updateCartItem}
-        deleteCartItem={deleteCartItem}
-      >
-        <Cart />
-      </FakeContextProvider>,
+      returnWithContext(
+        fakeCart,
+        addCartItem,
+        updateCartItem,
+        deleteCartItem,
+        <Cart />,
+      ),
       {
         wrapper: MemoryRouter,
       },
@@ -137,24 +106,14 @@ describe("cart component", () => {
   });
   it("pressing delete button calls the correct function", async () => {
     const user = userEvent.setup();
-    const fakeCart: CartItem[] = fakeProductData.map((item) => {
-      return {
-        ...item,
-        quantity: Math.floor(Math.random() * 10) + 1,
-      };
-    });
-    const addCartItem = vi.fn();
-    const updateCartItem = vi.fn();
-    const deleteCartItem = vi.fn();
     render(
-      <FakeContextProvider
-        cart={fakeCart}
-        addCartItem={addCartItem}
-        updateCartItem={updateCartItem}
-        deleteCartItem={deleteCartItem}
-      >
-        <Cart />
-      </FakeContextProvider>,
+      returnWithContext(
+        fakeCart,
+        addCartItem,
+        updateCartItem,
+        deleteCartItem,
+        <Cart />,
+      ),
       {
         wrapper: MemoryRouter,
       },

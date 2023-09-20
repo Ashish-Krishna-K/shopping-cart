@@ -3,47 +3,38 @@ import { type CartItem } from "../../appTypes";
 import { render, screen } from "@testing-library/react";
 import ProductItem from "./ProductItem";
 import { MemoryRouter } from "react-router-dom";
-import { FakeContextProvider, fakeProductData } from "../../testHelpers";
+import { fakeProductData, returnWithContext } from "../../testHelpers";
 import { userEvent } from "@testing-library/user-event";
 
 describe("product item component", () => {
   const fakeProductItem1 = fakeProductData[0];
   it("renders a productItem", async () => {
-    const fakeCart: CartItem[] = [];
-    const addCartItem = vi.fn();
-    const updateCartItem = vi.fn();
-    const deleteCartItem = vi.fn();
     render(
-      <FakeContextProvider
-        cart={fakeCart}
-        addCartItem={addCartItem}
-        updateCartItem={updateCartItem}
-        deleteCartItem={deleteCartItem}
-      >
-        <ProductItem item={fakeProductItem1} />
-      </FakeContextProvider>,
+      returnWithContext(
+        [],
+        vi.fn(),
+        vi.fn(),
+        vi.fn(),
+        <ProductItem item={fakeProductItem1} />,
+      ),
       {
         wrapper: MemoryRouter,
       },
     );
     expect(screen.getByText(fakeProductItem1.title)).toBeInTheDocument();
   });
-  it("adds a new item to the cart", async () => {
+  it("adding new item call the correct function", async () => {
     const fakeProductItem2 = fakeProductData[1];
     const user = userEvent.setup();
-    const fakeCart: CartItem[] = [];
     const addCartItem = vi.fn();
-    const updateCartItem = vi.fn();
-    const deleteCartItem = vi.fn();
     render(
-      <FakeContextProvider
-        cart={fakeCart}
-        addCartItem={addCartItem}
-        updateCartItem={updateCartItem}
-        deleteCartItem={deleteCartItem}
-      >
-        <ProductItem item={fakeProductItem2} />
-      </FakeContextProvider>,
+      returnWithContext(
+        [],
+        addCartItem,
+        vi.fn(),
+        vi.fn(),
+        <ProductItem item={fakeProductItem2} />,
+      ),
       {
         wrapper: MemoryRouter,
       },
@@ -54,7 +45,7 @@ describe("product item component", () => {
     await user.click(addButton);
     expect(addCartItem).toHaveBeenCalledOnce();
   });
-  it("updates an existing item in the cart", async () => {
+  it("updating an item calls the correct function", async () => {
     const fakeProductItem1 = fakeProductData[0];
     const user = userEvent.setup();
     const fakeCart: CartItem[] = [];
@@ -71,14 +62,13 @@ describe("product item component", () => {
       quantity: 2,
     };
     render(
-      <FakeContextProvider
-        cart={fakeCart}
-        addCartItem={addCartItem}
-        updateCartItem={updateCartItem}
-        deleteCartItem={deleteCartItem}
-      >
-        <ProductItem item={fakeProductItem1} />
-      </FakeContextProvider>,
+      returnWithContext(
+        fakeCart,
+        addCartItem,
+        updateCartItem,
+        deleteCartItem,
+        <ProductItem item={fakeProductItem1} />,
+      ),
       {
         wrapper: MemoryRouter,
       },
