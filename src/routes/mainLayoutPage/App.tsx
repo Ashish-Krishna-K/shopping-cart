@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { CartItem, type CartContextType } from "../appTypes";
-import NavBar from "../components/navBar/NavBar";
+import { CartItem, type CartContextType } from "../../appTypes";
+import NavBar from "../../components/navBar/NavBar";
 
 export const CartContext = createContext<CartContextType | null>(null);
 

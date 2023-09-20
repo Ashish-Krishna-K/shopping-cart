@@ -4,7 +4,7 @@ import StorePage from "./routes/storePage/StorePage";
 import ProductsDisplay from "./components/products/ProductsDisplay";
 import { ReactNode } from "react";
 import { ApiCategoryData, ApiProductData, CartItem } from "./appTypes";
-import { CartContext } from "./routes/App";
+import { CartContext } from "./routes/mainLayoutPage/App";
 import { Mock } from "vitest";
 
 const fakeCategoryData: ApiCategoryData[] = [

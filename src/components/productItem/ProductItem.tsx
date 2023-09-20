@@ -1,12 +1,11 @@
 import { ChangeEvent, useContext, useState } from "react";
-import { type ApiProductData, type CartContextType } from "../../appTypes";
+import { type ApiProductData } from "../../appTypes";
 import { useNavigate } from "react-router-dom";
-import { CartContext } from "../../routes/App";
+import { CartContext } from "../../routes/mainLayoutPage/App";
 
 const ProductItem = ({ item }: { item: ApiProductData }) => {
   const navigate = useNavigate();
-  const { cart, addCartItem, updateCartItem }: CartContextType =
-    useContext(CartContext)!;
+  const { cart, addCartItem, updateCartItem } = useContext(CartContext)!;
   const currentCartItem = cart.filter((cartItem) => cartItem.id === item.id)[0];
   const [showForm, setShowForm] = useState<boolean>();
   const [quantity, setQuantity] = useState<number>(

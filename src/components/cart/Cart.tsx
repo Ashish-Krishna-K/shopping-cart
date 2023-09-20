@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { CartContext } from "../../routes/App"
+import { CartContext } from "../../routes/mainLayoutPage/App"
 
 const Cart = () => {
   const {cart, deleteCartItem} = useContext(CartContext)!;

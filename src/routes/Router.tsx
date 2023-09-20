@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from "./App";
+import App from "./mainLayoutPage/App";
 import HomePage from "./homePage/HomePage";
 import StorePage from "./storePage/StorePage";
 import { loader as categoryLoader } from "./storePage/StorePageLoader";
