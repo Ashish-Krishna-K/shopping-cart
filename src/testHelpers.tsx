@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 import { LoaderFunctionArgs, createMemoryRouter } from "react-router-dom";
 import App from "./routes/mainLayoutPage/App";
 import HomePage from "./routes/homePage/HomePage";
@@ -163,7 +162,6 @@ const checkoutRouter = createMemoryRouter(routes, {
 
 interface fakeProps {
   cart: CartItem[];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   addCartItem: Mock<[item: any], number> | (() => void);
   updateCartItem: () => void;
   deleteCartItem: () => void;
@@ -188,7 +186,6 @@ const FakeContextProvider = ({
 
 const returnWithContext = (
   cart: CartItem[],
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   addFn: Mock<[item: any], number> | (() => void),
   updateFn: () => void,
   deleteFn: () => void,
