@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createMemoryRouter } from "react-router-dom";
 import StorePage from "./routes/storePage/StorePage";
 import ProductsDisplay from "./components/products/ProductsDisplay";
@@ -115,8 +116,12 @@ const router = createMemoryRouter(
         {
           path: ":category",
           element: <ProductsDisplay />,
-          loader: ({params}) => {
-            return { data: fakeProductData.filter(item => item.category === params.category) };
+          loader: ({ params }) => {
+            return {
+              data: fakeProductData.filter(
+                (item) => item.category === params.category,
+              ),
+            };
           },
         },
       ],
@@ -129,15 +134,21 @@ const router = createMemoryRouter(
 );
 
 interface fakeProps {
-  cart: CartItem[]
+  cart: CartItem[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  addCartItem: Mock<[item: any], number> | (() => void), 
-  updateCartItem: () => void, 
-  deleteCartItem: () => void, 
-  children?: ReactNode | undefined 
+  addCartItem: Mock<[item: any], number> | (() => void);
+  updateCartItem: () => void;
+  deleteCartItem: () => void;
+  children?: ReactNode | undefined;
 }
 
-const FakeContextProvider = ({cart, addCartItem, updateCartItem, deleteCartItem, children }: fakeProps) => {
+const FakeContextProvider = ({
+  cart,
+  addCartItem,
+  updateCartItem,
+  deleteCartItem,
+  children,
+}: fakeProps) => {
   return (
     <CartContext.Provider
       value={{ cart, addCartItem, updateCartItem, deleteCartItem }}
@@ -148,7 +159,7 @@ const FakeContextProvider = ({cart, addCartItem, updateCartItem, deleteCartItem,
 };
 
 export {
-  // eslint-disable-next-line react-refresh/only-export-components
   router,
   FakeContextProvider,
+  fakeProductData
 };

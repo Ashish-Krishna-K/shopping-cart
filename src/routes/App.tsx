@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { CartItem, type CartContextType } from "../appTypes";
+import NavBar from "../components/navBar/NavBar";
 
 export const CartContext = createContext<CartContextType | null>(null);
 
@@ -24,10 +25,7 @@ const App = () => {
     >
       <header>
         <h1>Fake Store</h1>
-        <nav>
-          {/* put the navigation links here */}
-          {/* put the cart view here */}
-        </nav>
+        <NavBar />
       </header>
       <main>
         <Outlet />

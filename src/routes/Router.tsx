@@ -35,8 +35,8 @@ const Router = () => {
           ],
         },
         {
-          path: "product/:productId",
-          element: <h1>Product</h1>,
+          path: "about",
+          element: <h1>About</h1>,
         },
         {
           path: "checkout",

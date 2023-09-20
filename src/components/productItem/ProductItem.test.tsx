@@ -1,29 +1,13 @@
 import { describe, expect, it, vi } from "vitest";
-import { CartItem, type ApiProductData } from "../../appTypes";
+import { type CartItem } from "../../appTypes";
 import { render, screen } from "@testing-library/react";
 import ProductItem from "./ProductItem";
 import { MemoryRouter } from "react-router-dom";
-import { FakeContextProvider } from "../../testHelpers";
+import { FakeContextProvider, fakeProductData } from "../../testHelpers";
 import { userEvent } from "@testing-library/user-event";
 
-const fakeProductItem1: ApiProductData = {
-  id: 0,
-  title: "fake item",
-  price: 999,
-  category: "fake category",
-  description: "fake description",
-  image: "/fakeimg",
-};
-const fakeProductItem2: ApiProductData = {
-  id: 1,
-  title: "fake item 2",
-  price: 999,
-  category: "fake category",
-  description: "fake description 2",
-  image: "/fakeimg",
-};
-
 describe("product item component", () => {
+  const fakeProductItem1 = fakeProductData[0];
   it("renders a productItem", async () => {
     const fakeCart: CartItem[] = [];
     const addCartItem = vi.fn();
@@ -45,6 +29,7 @@ describe("product item component", () => {
     expect(screen.getByText(fakeProductItem1.title)).toBeInTheDocument();
   });
   it("adds a new item to the cart", async () => {
+    const fakeProductItem2 = fakeProductData[1];
     const user = userEvent.setup();
     const fakeCart: CartItem[] = [];
     const addCartItem = vi.fn();
@@ -70,6 +55,7 @@ describe("product item component", () => {
     expect(addCartItem).toHaveBeenCalledOnce();
   });
   it("updates an existing item in the cart", async () => {
+    const fakeProductItem1 = fakeProductData[0];
     const user = userEvent.setup();
     const fakeCart: CartItem[] = [];
     const addCartItem = vi.fn((item) => fakeCart.push(item));
@@ -103,12 +89,14 @@ describe("product item component", () => {
     await user.click(addButton1);
     const addItemButton2 = screen.getByRole("button", { name: "Add to cart" });
     await user.click(addItemButton2);
-    const incrementButton = screen.getByRole("button", {name: "+"});
+    const incrementButton = screen.getByRole("button", { name: "+" });
     await user.click(incrementButton);
     const addButton2 = screen.getByRole("button", { name: "Add" });
     await user.click(addButton2);
     expect(updateCartItem).toHaveBeenCalledOnce();
     expect(updateCartItem.mock.calls[0][0].id).toBe(updatedFakeProductItem1.id);
-    expect(updateCartItem.mock.calls[0][0].quantity).toBe(updatedFakeProductItem1.quantity);
+    expect(updateCartItem.mock.calls[0][0].quantity).toBe(
+      updatedFakeProductItem1.quantity,
+    );
   });
 });
