@@ -32,3 +32,5 @@ export interface CartContextType {
   updateCartItem: (newCartItem: CartItem) => void;
   deleteCartItem: (itemId: number) => void;
 }
+
+export type CarouselPropsType = Pick<ApiProductData, "id" | "title" | "image">;

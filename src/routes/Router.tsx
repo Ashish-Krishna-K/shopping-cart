@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./mainLayoutPage/App";
 import HomePage from "./homePage/HomePage";
+import {loader as homeLoader} from "./homePage/HomePageLoader";
 import StorePage from "./storePage/StorePage";
 import { loader as categoryLoader } from "./storePage/StorePageLoader";
 import ProductsDisplay from "../components/products/ProductsDisplay";
@@ -17,6 +18,7 @@ const Router = () => {
         {
           index: true,
           element: <HomePage />,
+          loader: homeLoader,
         },
         {
           path: "shop",
