@@ -38,10 +38,6 @@ const Router = () => {
           ],
         },
         {
-          path: "about",
-          element: <h1>About</h1>,
-        },
-        {
           path: "checkout",
           element: <CheckoutPage />,
         },

@@ -18,7 +18,6 @@ describe("nav bar component", () => {
     );
     expect(screen.getByRole("link", { name: /home/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /store/i })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /about/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /checkout/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /cart/i })).toBeInTheDocument();
   });
