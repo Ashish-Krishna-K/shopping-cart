@@ -11,7 +11,7 @@ const HomePage = () => {
         Fake store is a fake store! There is nothing to buy here, but you're
         welcome to pretent like you're buying something.
       </p>
-      <Carousel products={data} />
+      {data && <Carousel products={data} />}
       <NavLink to={"/shop"}>Shop Now</NavLink>
     </>
   );
