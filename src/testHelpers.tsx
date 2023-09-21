@@ -108,6 +108,9 @@ const routes = [
       {
         index: true,
         element: <HomePage />,
+        loader: () => {
+          return { data: fakeProductData };
+        },
       },
       {
         path: "shop",

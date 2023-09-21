@@ -31,11 +31,17 @@ describe("carousel component", () => {
   it("image changes to next slide automatically after 3 seconds", async () => {
     vi.useFakeTimers();
     render(<Carousel products={carouselList} />);
-    act(() => {vi.advanceTimersByTime(3000)});
+    act(() => {
+      vi.advanceTimersByTime(3000);
+    });
     expect(screen.getByAltText(carouselList[1].title)).toBeInTheDocument();
-    act(() => {vi.advanceTimersByTime(3000)});
+    act(() => {
+      vi.advanceTimersByTime(3000);
+    });
     expect(screen.getByAltText(carouselList[2].title)).toBeInTheDocument();
-    act(() => {vi.advanceTimersByTime(3000)});
+    act(() => {
+      vi.advanceTimersByTime(3000);
+    });
     expect(screen.getByAltText(carouselList[3].title)).toBeInTheDocument();
-  })
+  });
 });

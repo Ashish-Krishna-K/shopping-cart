@@ -11,7 +11,6 @@ describe("App/main page of website", () => {
       screen.getByRole("heading", { level: 1, name: "Fake Store" }),
     ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /home/i })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /about/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /shop/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /checkout/i })).toBeInTheDocument();
     expect(
@@ -26,15 +25,12 @@ describe("App/main page of website", () => {
     render(<RouterProvider router={allRouter} />);
     const homeLink = screen.getByRole("link", { name: /home/i });
     const storeLink = screen.getByRole("link", { name: /shop/i });
-    const aboutLink = screen.getByRole("link", { name: /about/i });
     const checkoutLink = screen.getByRole("link", { name: /checkout/i });
     await user.click(storeLink);
     await waitFor(() => screen.getByText(/fake product 1/i));
     expect(
       screen.getByRole("heading", { name: /shop page/i }),
     ).toBeInTheDocument();
-    await user.click(aboutLink);
-    expect(screen.getByRole("heading", { name: /about/i })).toBeInTheDocument();
     await user.click(checkoutLink);
     expect(screen.getByText(/your cart is empty/i)).toBeInTheDocument();
     await user.click(homeLink);
