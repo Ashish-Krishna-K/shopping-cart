@@ -7,13 +7,40 @@ import { loader as categoryLoader } from "./storePage/StorePageLoader";
 import ProductsDisplay from "../components/products/ProductsDisplay";
 import { loader as productsLoader } from "../components/products/ProductsDisplayLoader";
 import CheckoutPage from "./checkoutPage/CheckoutPage";
+import { useState } from "react";
+import { CartItem } from "../appTypes";
+import { CartContext } from "../routes/mainLayoutPage/App";
+import { PropsWithChildren } from "react";
+import ErrorPage from "./errorPage/ErrorPage";
+
+const ContextProvider = ({ children }: PropsWithChildren) => {
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const addCartItem = (newCartItem: CartItem) => {
+    setCart([...cart, newCartItem]);
+  };
+  const updateCartItem = (newCartItem: CartItem) => {
+    setCart(
+      cart.map((item) => (item.id === newCartItem.id ? newCartItem : item)),
+    );
+  };
+  const deleteCartItem = (itemId: number) => {
+    setCart(cart.filter((item) => item.id !== itemId));
+  };
+  return (
+    <CartContext.Provider
+      value={{ cart, addCartItem, updateCartItem, deleteCartItem }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
+};
 
 const Router = () => {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <App />,
-      errorElement: <h1>Error</h1>,
+      errorElement: <ErrorPage />,
       children: [
         {
           index: true,
@@ -45,7 +72,11 @@ const Router = () => {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <ContextProvider>
+      <RouterProvider router={router} />
+    </ContextProvider>
+  );
 };
 
 export default Router;

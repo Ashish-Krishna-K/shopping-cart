@@ -22,6 +22,6 @@ describe("Sidebar for filtering categories", () => {
     ];
     render(<FilterSidebar data={fakeData} />, { wrapper: MemoryRouter });
     expect(screen.getByText(/some-category-1/i)).toBeInTheDocument();
-    expect(screen.getAllByRole("link").length).toBe(fakeData.length);
+    expect(screen.getAllByRole("link").length).toBe(fakeData.length + 1);
   });
 });

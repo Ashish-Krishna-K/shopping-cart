@@ -1,0 +1,30 @@
+.homePage {
+  overflow-y: auto;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.homeHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.homeHeader > p > a {
+  margin: 0 1vw;
+}
+
+.activeLink {
+  color: green;
+}
+
+.pendingLink {
+  color: yellow;
+}
+
+.cta {
+  background-color: var(--accent);
+  color: var(--primary-main);
+  padding: 1vmax;
+  border-radius: 5px;
+}

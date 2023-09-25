@@ -1,0 +1,72 @@
+.nav {
+  display: flex;
+  align-items: center;
+  padding: 0 2vw;
+}
+
+.siteName {
+  font-family: "Lobster", cursive;
+  font-size: 2.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+a:has(.siteName) {
+  text-decoration: none;
+}
+
+.nav a {
+  color: var(--primary-main);
+  padding: 1.5vmin;
+  border-radius: 5px;
+}
+
+.navList {
+  flex: 1;
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  gap: 2vw;
+  align-items: center;
+  padding: 0;
+}
+
+.cartBtn {
+  position: relative;
+  padding: 1vmin;
+  border: none;
+  background: none;
+  color: var(--accent);
+  cursor: pointer;
+  align-self: flex-end;
+  justify-self: flex-end;
+}
+
+.cartIndicator {
+  background-color: var(--accent);
+  color: var(--primary-main);
+  padding: 1vmin;
+  position: absolute;
+  top: -25%;
+  right: -15%;
+  border-radius: 50px;
+}
+
+.alignRight {
+  justify-content: flex-end;
+}
+
+.activeLink {
+  color: var(--primary-main) !important;
+  background-color: var(--accent);
+}
+
+.pendingLink {
+  color: var(--accent) !important;
+}
+
+.visuallyHidden {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}

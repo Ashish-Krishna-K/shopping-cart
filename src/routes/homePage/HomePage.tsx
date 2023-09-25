@@ -1,19 +1,38 @@
-import { NavLink, useLoaderData } from "react-router-dom";
+import { NavLink, useLoaderData, useNavigation } from "react-router-dom";
 import Carousel from "../../components/carousel/Carousel";
 import { ProductsDisplayLoaderTypes } from "../../appTypes";
+import styles from "./HomePage.module.css";
+import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
 
 const HomePage = () => {
   const { data } = useLoaderData() as ProductsDisplayLoaderTypes;
+  const navigation = useNavigation();
+
+  if (navigation.state === "loading") return <LoadingSpinner></LoadingSpinner>;
+
   return (
-    <>
-      <h1>Welcome to Fake store!</h1>
-      <p>
-        Fake store is a fake store! There is nothing to buy here, but you're
-        welcome to pretent like you're buying something.
-      </p>
+    <section className={styles.homePage}>
+      <div className={styles.homeHeader}>
+        <h2>Welcome to Fake store!</h2>
+        <p>
+          Fake store is a fake store! There is nothing to buy here, but you're
+          welcome to pretent like you're buying something.
+          <NavLink
+            to={"/shop"}
+            className={({ isActive, isPending }) =>
+              isActive
+                ? styles.activeLink
+                : isPending
+                ? styles.pendingLink
+                : styles.cta
+            }
+          >
+            Shop Now
+          </NavLink>
+        </p>
+      </div>
       {data && <Carousel products={data} />}
-      <NavLink to={"/shop"}>Shop Now</NavLink>
-    </>
+    </section>
   );
 };
 

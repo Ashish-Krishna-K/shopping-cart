@@ -1,0 +1,86 @@
+.mainLayout {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  height: 100svh;
+}
+
+.header {
+  background-color: var(--secondary);
+  color: var(--primary-main);
+  box-shadow: 0 1px 5px 2px var(--accent);
+  z-index: 5;
+}
+
+.main {
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.footer {
+  text-align: center;
+  background-color: var(--secondary);
+  color: var(--primary-main);
+  box-shadow: 0 -1px 5px 2px var(--accent);
+  z-index: 5;
+}
+
+.footer a,
+.footer a:visited {
+  color: yellow;
+}
+
+.cartAppear {
+  translate: 150%;
+  opacity: 0;
+}
+
+.cartAppearActive {
+  opacity: 1;
+  translate: 0;
+  transition:
+    translate 0.5s,
+    opacity 0.5s;
+}
+
+.cartAppearDone {
+  translate: 0;
+  opacity: 1;
+}
+
+.cartEnter {
+  translate: 150%;
+  opacity: 0;
+}
+
+.cartEnterActive {
+  translate: 0;
+  opacity: 1;
+  transition:
+    translate 0.5s,
+    opacity 0.5s;
+}
+
+.cartEnterDone {
+  translate: 0;
+  opacity: 1;
+}
+
+.cartExit {
+  translate: 0;
+  opacity: 1;
+}
+
+.cartExitActive {
+  translate: 150%;
+  opacity: 0;
+  transition:
+    translate 0.5s,
+    opacity 0.5s;
+}
+
+.cartExitDone {
+  translate: 150%;
+  opacity: 0;
+}

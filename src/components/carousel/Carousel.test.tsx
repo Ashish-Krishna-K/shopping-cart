@@ -2,8 +2,9 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { fakeProductData } from "../../testHelpers";
 import Carousel from "./Carousel";
-import userEvent from "@testing-library/user-event";
 import { act } from "react-dom/test-utils";
+import { MemoryRouter } from "react-router-dom";
+import { config } from "react-transition-group";
 
 describe("carousel component", () => {
   const carouselList = fakeProductData
@@ -13,34 +14,25 @@ describe("carousel component", () => {
       image: item.image,
     }))
     .slice(0, 5);
-  it("renders the image", () => {
-    render(<Carousel products={carouselList} />);
+  it("renders the image", async () => {
+    render(<Carousel products={carouselList} />, { wrapper: MemoryRouter });
     expect(screen.getByAltText(carouselList[0].title)).toBeInTheDocument();
-    expect(screen.getAllByRole("button").length).toBe(carouselList.length);
   });
-  it("clicking on a button changes the image displayed", async () => {
-    const user = userEvent.setup();
-    render(<Carousel products={carouselList} />);
-    let nextImg = screen.getByTestId(carouselList[1].title);
-    await user.click(nextImg);
-    expect(screen.getByAltText(carouselList[1].title)).toBeInTheDocument();
-    nextImg = screen.getByTestId(carouselList[2].title);
-    await user.click(nextImg);
-    expect(screen.getByAltText(carouselList[2].title)).toBeInTheDocument();
-  });
-  it("image changes to next slide automatically after 3 seconds", async () => {
+  it("image changes to next slide automatically after 4 seconds", async () => {
+    config.disabled = true;
     vi.useFakeTimers();
-    render(<Carousel products={carouselList} />);
+    render(<Carousel products={carouselList} />, { wrapper: MemoryRouter });
+    expect(screen.getByAltText(carouselList[0].title)).toBeInTheDocument();
     act(() => {
-      vi.advanceTimersByTime(3000);
+      vi.advanceTimersByTime(4000);
     });
     expect(screen.getByAltText(carouselList[1].title)).toBeInTheDocument();
     act(() => {
-      vi.advanceTimersByTime(3000);
+      vi.advanceTimersByTime(4000);
     });
     expect(screen.getByAltText(carouselList[2].title)).toBeInTheDocument();
     act(() => {
-      vi.advanceTimersByTime(3000);
+      vi.advanceTimersByTime(4000);
     });
     expect(screen.getByAltText(carouselList[3].title)).toBeInTheDocument();
   });

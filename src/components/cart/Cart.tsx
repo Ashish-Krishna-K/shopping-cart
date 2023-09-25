@@ -1,48 +1,91 @@
-import { useContext } from "react";
+import { ForwardedRef, forwardRef, useContext } from "react";
 import { CartContext } from "../../routes/mainLayoutPage/App";
+import styles from "./Cart.module.css";
+import { useNavigate } from "react-router-dom";
+import Icon from "@mdi/react";
+import { mdiDelete } from "@mdi/js";
 
-const Cart = () => {
+const Cart = forwardRef(function Cart(
+  {
+    toggleCart,
+  }: {
+    toggleCart: () => void;
+  },
+  ref: ForwardedRef<HTMLElement>,
+) {
+  const navigate = useNavigate();
   const { cart, deleteCartItem } = useContext(CartContext)!;
-  if (cart.length < 1) return <p>Cart is empty!</p>;
+  const isCartEmpty = cart.length < 1;
   return (
-    <div>
-      <h2>Your Cart: </h2>
-      <ul>
-        {cart.map((cartItem) => (
-          <li key={cartItem.id}>
-            <img
-              src={cartItem.image}
-              alt={cartItem.title}
-              width={50}
-              height={50}
-            />
-            <h3>{cartItem.title}</h3>
-            <p>{cartItem.quantity}</p>
-            <p>
-              Item total:
-              <strong>{cartItem.quantity * cartItem.price}</strong>
-            </p>
-            <button
-              type="button"
-              onClick={() => {
-                deleteCartItem(cartItem.id);
-              }}
-            >
-              remove item
-            </button>
-          </li>
-        ))}
-      </ul>
-      <div>
-        <span>Cart total: </span>
-        <span>
-          {cart
-            .map((item) => item.quantity * item.price)
-            .reduce((a, b) => a + b, 0)}
-        </span>
+    <section className={styles.cart} ref={ref}>
+      <div className={isCartEmpty ? styles.emptyCart : styles.nonEmptyCart}>
+        {isCartEmpty ? (
+          <h2>Cart is empty!</h2>
+        ) : (
+          <>
+            <ul className={styles.cartItems}>
+              {cart.map((cartItem) => (
+                <li key={cartItem.id} className={styles.product}>
+                  <img
+                    src={cartItem.image}
+                    alt={cartItem.title}
+                    width={50}
+                    height={50}
+                  />
+                  <div>
+                    <h3>{cartItem.title}</h3>
+                    <p>Items in Cart: {cartItem.quantity}</p>
+                    <p>
+                      Item total:{" "}
+                      <strong>
+                        $
+                        {parseFloat(
+                          (cartItem.quantity * cartItem.price).toString(),
+                        ).toFixed(2)}
+                      </strong>
+                    </p>
+                  </div>
+                  <button
+                    className={styles.removeBtn}
+                    tabIndex={0}
+                    type="button"
+                    onClick={() => {
+                      deleteCartItem(cartItem.id);
+                    }}
+                  >
+                    <span className={styles.visuallyHidden}>remove item</span>
+                    <Icon path={mdiDelete} size={2} aria-hidden={true} />
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <div className={styles.cartTotal}>
+              <p>
+                <strong>
+                  Cart total: $
+                  {parseFloat(
+                    cart
+                      .map((item) => item.quantity * item.price)
+                      .reduce((a, b) => a + b, 0)
+                      .toString(),
+                  ).toFixed(2)}
+                </strong>
+              </p>
+              <button
+                className={styles.checkout}
+                onClick={() => {
+                  toggleCart();
+                  navigate("/checkout");
+                }}
+              >
+                Proceed to Checkout
+              </button>
+            </div>
+          </>
+        )}
       </div>
-    </div>
+    </section>
   );
-};
+});
 
 export default Cart;

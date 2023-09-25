@@ -3,20 +3,21 @@ import { type CartItem } from "../../appTypes";
 import { render, screen } from "@testing-library/react";
 import ProductItem from "./ProductItem";
 import { MemoryRouter } from "react-router-dom";
-import { fakeProductData, returnWithContext } from "../../testHelpers";
+import { fakeProductData, FakeContextProvider } from "../../testHelpers";
 import { userEvent } from "@testing-library/user-event";
 
 describe("product item component", () => {
   const fakeProductItem1 = fakeProductData[0];
   it("renders a productItem", async () => {
     render(
-      returnWithContext(
-        [],
-        vi.fn(),
-        vi.fn(),
-        vi.fn(),
+      <FakeContextProvider
+        cart={[]}
+        addCartItem={vi.fn()}
+        updateCartItem={vi.fn()}
+        deleteCartItem={vi.fn()}
+      >
         <ProductItem item={fakeProductItem1} />,
-      ),
+      </FakeContextProvider>,
       {
         wrapper: MemoryRouter,
       },
@@ -28,13 +29,14 @@ describe("product item component", () => {
     const user = userEvent.setup();
     const addCartItem = vi.fn();
     render(
-      returnWithContext(
-        [],
-        addCartItem,
-        vi.fn(),
-        vi.fn(),
+      <FakeContextProvider
+        cart={[]}
+        addCartItem={addCartItem}
+        updateCartItem={vi.fn()}
+        deleteCartItem={vi.fn()}
+      >
         <ProductItem item={fakeProductItem2} />,
-      ),
+      </FakeContextProvider>,
       {
         wrapper: MemoryRouter,
       },
@@ -62,13 +64,14 @@ describe("product item component", () => {
       quantity: 2,
     };
     render(
-      returnWithContext(
-        fakeCart,
-        addCartItem,
-        updateCartItem,
-        deleteCartItem,
+      <FakeContextProvider
+        cart={fakeCart}
+        addCartItem={addCartItem}
+        updateCartItem={updateCartItem}
+        deleteCartItem={deleteCartItem}
+      >
         <ProductItem item={fakeProductItem1} />,
-      ),
+      </FakeContextProvider>,
       {
         wrapper: MemoryRouter,
       },
@@ -79,8 +82,11 @@ describe("product item component", () => {
     await user.click(addButton1);
     const addItemButton2 = screen.getByRole("button", { name: "Add to cart" });
     await user.click(addItemButton2);
-    const incrementButton = screen.getByRole("button", { name: "+" });
-    await user.click(incrementButton);
+    const inputElem = screen.getByLabelText(
+      /number of items to be added to the cart/i,
+    );
+    await user.clear(inputElem);
+    await user.type(inputElem, "2");
     const addButton2 = screen.getByRole("button", { name: "Add" });
     await user.click(addButton2);
     expect(updateCartItem).toHaveBeenCalledOnce();

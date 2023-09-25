@@ -1,0 +1,79 @@
+.carousel {
+  position: relative;
+  margin: 3vh 0;
+}
+
+.productImg {
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  height: 55svh;
+  cursor: pointer;
+  mix-blend-mode: multiply;
+}
+
+.productImgAppear {
+  translate: -150%;
+  opacity: 0;
+}
+.productImgAppearActive {
+  opacity: 1;
+  translate: 0;
+  transition:
+    translate 1.5s,
+    opacity 1.5s;
+}
+.productImgAppearDone {
+  translate: 0;
+  opacity: 1;
+}
+.productImgEnter {
+  translate: -150%;
+  opacity: 0;
+}
+.productImgEnterActive {
+  translate: 0;
+  opacity: 1;
+  transition:
+    translate 1.5s,
+    opacity 1.5s;
+}
+.productImgEnterDone {
+  translate: 0;
+  opacity: 1;
+}
+.productImgExit {
+  translate: 0;
+  opacity: 1;
+}
+.productImgExitActive {
+  translate: 150%;
+  opacity: 0;
+  transition:
+    translate 1.5s,
+    opacity 1.5s;
+}
+.productImgExitDone {
+  translate: 150%;
+  opacity: 0;
+}
+
+.indicators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1vw;
+  margin-top: 5vh;
+}
+
+.imgIndicator {
+  width: 10px;
+  min-height: 10px;
+  background-color: var(--primary-off);
+  border-radius: 100px;
+}
+
+.currentImg {
+  composes: imgIndicator;
+  background-color: var(--accent);
+}

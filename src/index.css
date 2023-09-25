@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Lobster&family=Poppins:ital,wght@0,400;0,500;0,800;0,900;1,600;1,700&family=Staatliches&display=swap");
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100svh;
+  background-color: var(--primary-main);
+  color: var(--accent);
+  font-family: "Poppins", sans-serif;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  width: 500px;
+  height: auto;
+}
+
+button,
+a {
+  font-family: "Staatliches", cursive;
+  font-size: 1.1rem;
+  font-weight: 900;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+button:hover {
+  scale: 1.1;
+}
+
+button:active {
+  scale: 0.9;
+}
+
+:root {
+  --primary-main: rgb(255, 245, 224);
+  --primary-off: rgb(255, 105, 105);
+  --secondary: rgb(187, 37, 37);
+  --accent: rgb(20, 30, 70);
+}
+
+::-webkit-scrollbar {
+  width: auto;
+}
+
+::-webkit-scrollbar-track {
+  background-color: inherit;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-off);
+  border-radius: 10px;
+  filter: brightness(0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--secondary);
+  filter: brightness(1);
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}

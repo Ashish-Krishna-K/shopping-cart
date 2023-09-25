@@ -1,12 +1,22 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
-import { allRouter } from "../../testHelpers";
+import { describe, expect, it, vi } from "vitest";
+import { FakeContextProvider, allRouter } from "../../testHelpers";
 import { RouterProvider } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
+import { config } from "react-transition-group";
 
 describe("App/main page of website", () => {
   it("renders all elements as expected", async () => {
-    render(<RouterProvider router={allRouter} />);
+    render(
+      <FakeContextProvider
+        cart={[]}
+        addCartItem={vi.fn()}
+        updateCartItem={vi.fn()}
+        deleteCartItem={vi.fn()}
+      >
+        <RouterProvider router={allRouter} />
+      </FakeContextProvider>,
+    );
     expect(
       screen.getByRole("heading", { level: 1, name: "Fake Store" }),
     ).toBeInTheDocument();
@@ -22,15 +32,24 @@ describe("App/main page of website", () => {
   });
   it("clicking on various pages link will render the correct page", async () => {
     const user = userEvent.setup();
-    render(<RouterProvider router={allRouter} />);
+    render(
+      <FakeContextProvider
+        cart={[]}
+        addCartItem={vi.fn()}
+        updateCartItem={vi.fn()}
+        deleteCartItem={vi.fn()}
+      >
+        <RouterProvider router={allRouter} />
+      </FakeContextProvider>,
+    );
     const homeLink = screen.getByRole("link", { name: /home/i });
     const storeLink = screen.getByRole("link", { name: /shop/i });
     const checkoutLink = screen.getByRole("link", { name: /checkout/i });
     await user.click(storeLink);
     await waitFor(() => screen.getByText(/fake product 1/i));
     expect(
-      screen.getByRole("heading", { name: /shop page/i }),
-    ).toBeInTheDocument();
+      screen.getAllByRole("button", { name: /add to cart/i }),
+    ).toHaveLength(9);
     await user.click(checkoutLink);
     expect(screen.getByText(/your cart is empty/i)).toBeInTheDocument();
     await user.click(homeLink);
@@ -39,9 +58,19 @@ describe("App/main page of website", () => {
     ).toBeInTheDocument();
   });
   it("toggles the cart component when cart button is clicked", async () => {
+    config.disabled = true;
     const user = userEvent.setup();
-    render(<RouterProvider router={allRouter} />);
-    const cartBtn = screen.getByRole("button", { name: /cart/i });
+    render(
+      <FakeContextProvider
+        cart={[]}
+        addCartItem={vi.fn()}
+        updateCartItem={vi.fn()}
+        deleteCartItem={vi.fn()}
+      >
+        <RouterProvider router={allRouter} />
+      </FakeContextProvider>,
+    );
+    const cartBtn = screen.getByRole("button", { name: "Cart" });
     await user.click(cartBtn);
     expect(screen.getByText("Cart is empty!")).toBeInTheDocument();
     await user.click(cartBtn);

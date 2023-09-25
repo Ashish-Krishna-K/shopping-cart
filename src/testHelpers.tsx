@@ -8,6 +8,7 @@ import { ApiCategoryData, ApiProductData, CartItem } from "./appTypes";
 import { CartContext } from "./routes/mainLayoutPage/App";
 import { Mock } from "vitest";
 import CheckoutPage from "./routes/checkoutPage/CheckoutPage";
+import ErrorPage from "./routes/errorPage/ErrorPage";
 
 const fakeCategoryData: ApiCategoryData[] = [
   {
@@ -103,7 +104,7 @@ const routes = [
   {
     path: "/",
     element: <App />,
-    errorElement: <h1>Error</h1>,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -138,10 +139,6 @@ const routes = [
             },
           },
         ],
-      },
-      {
-        path: "about",
-        element: <h1>About</h1>,
       },
       {
         path: "checkout",
@@ -187,30 +184,10 @@ const FakeContextProvider = ({
   );
 };
 
-const returnWithContext = (
-  cart: CartItem[],
-  addFn: Mock<[item: any], number> | (() => void),
-  updateFn: () => void,
-  deleteFn: () => void,
-  children: ReactNode,
-) => {
-  return (
-    <FakeContextProvider
-      cart={cart}
-      addCartItem={addFn}
-      updateCartItem={updateFn}
-      deleteCartItem={deleteFn}
-    >
-      {children}
-    </FakeContextProvider>
-  );
-};
-
 export {
   allRouter,
   shopRouter,
   checkoutRouter,
   FakeContextProvider,
   fakeProductData,
-  returnWithContext,
 };

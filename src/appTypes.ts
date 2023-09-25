@@ -7,9 +7,19 @@ export interface ApiProductData {
   image: string;
 }
 
+export interface LocalProductCache {
+  storedAt: number;
+  products: ApiProductData[];
+}
+
 export interface ApiCategoryData {
   id: string;
   name: string;
+}
+
+export interface LocalCategoryCache {
+  storedAt: number;
+  categories: ApiCategoryData[];
 }
 
 export type CategorySelectionHandler = (item: ApiCategoryData) => void;
