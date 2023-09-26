@@ -3,7 +3,11 @@ import App from "./routes/mainLayoutPage/App";
 import HomePage from "./routes/homePage/HomePage";
 import StorePage from "./routes/storePage/StorePage";
 import ProductsDisplay from "./components/products/ProductsDisplay";
-import { type ApiCategoryData, type ApiProductData, type fakeProps } from "./appTypes";
+import {
+  type ApiCategoryData,
+  type ApiProductData,
+  type fakeProps,
+} from "./appTypes";
 import { CartContext } from "./routes/mainLayoutPage/App";
 import CheckoutPage from "./routes/checkoutPage/CheckoutPage";
 import ErrorPage from "./routes/errorPage/ErrorPage";

@@ -13,7 +13,7 @@ const ProductItem = ({ item }: { item: ApiProductData }) => {
   const currentCartItem = cart.filter((cartItem) => cartItem.id === item.id)[0];
   const [showForm, setShowForm] = useState<boolean>();
   // so if the item is already in the cart then the add to cart input should show the
-  // quantity added by user instead of a default value 
+  // quantity added by user instead of a default value
   const [quantity, setQuantity] = useState<number>(
     currentCartItem?.quantity || 1,
   );
@@ -27,11 +27,11 @@ const ProductItem = ({ item }: { item: ApiProductData }) => {
   };
   const handleAddToCart = () => {
     if (currentCartItem === undefined) {
-      // if the item is not already present in the cart we're adding it as a new 
+      // if the item is not already present in the cart we're adding it as a new
       // item
       addCartItem({ ...item, quantity });
     } else {
-      // if it's already present we're only updating the quantity as everything 
+      // if it's already present we're only updating the quantity as everything
       // else is same.
       updateCartItem({ ...currentCartItem, quantity });
     }
@@ -69,8 +69,7 @@ const ProductItem = ({ item }: { item: ApiProductData }) => {
           <div>
             <p>
               <strong>
-                Total: $
-                {/* Ensuring the decimal digits is limited to 2 */}
+                Total: ${/* Ensuring the decimal digits is limited to 2 */}
                 {parseFloat((item.price * quantity).toString()).toFixed(2)}
               </strong>
             </p>

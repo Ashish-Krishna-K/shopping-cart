@@ -25,12 +25,10 @@ const Carousel = ({ products }: { products: CarouselPropsType[] }) => {
 
   return (
     <div className={styles.carousel}>
-      {
-      /* 
+      {/* 
         The aim is to show a smooth fade in from left and fade out to the
         right transition hence using the SwitchTransition component. 
-       */
-      }
+       */}
       <SwitchTransition>
         <CSSTransition
           // based on showImg state the enter and exit phase of transiton
@@ -53,7 +51,7 @@ const Carousel = ({ products }: { products: CarouselPropsType[] }) => {
             exitDone: styles.productImgExitDone,
           }}
           onEntered={() => {
-            // We want the image to exit 3 seconds after it completes the 
+            // We want the image to exit 3 seconds after it completes the
             // enter transition
             setTimeout(() => {
               // To trigger the exit phase of the transition
@@ -72,7 +70,7 @@ const Carousel = ({ products }: { products: CarouselPropsType[] }) => {
             src={currentImg.image}
             alt={currentImg.title}
             onClick={() => {
-              // We want the user to be redirected to the shop page if they 
+              // We want the user to be redirected to the shop page if they
               // click on the image
               navigate("/shop");
             }}
@@ -81,13 +79,11 @@ const Carousel = ({ products }: { products: CarouselPropsType[] }) => {
         </CSSTransition>
       </SwitchTransition>
       <div className={styles.indicators}>
-        {
-          /* 
+        {/* 
             We want a small indication of the image position to the user however 
             setting up the indicator to be clickable to navigate to different image
             caused issues with the transitions hence currently it's not clickable
-          */
-        }
+          */}
         {products.map((product) => (
           <div
             key={product.id}

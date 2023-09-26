@@ -66,7 +66,7 @@
   box-shadow: -1px 0px 5px 2px var(--accent);
 }
 
-.cartTotal>button {
+.cartTotal > button {
   padding: 1vmax 2vmax;
   border-radius: 5px;
   background-color: var(--accent);

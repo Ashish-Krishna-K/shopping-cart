@@ -7,7 +7,7 @@ import Cart from "./Cart";
 import userEvent from "@testing-library/user-event";
 
 describe("cart component", () => {
-  // a fake cart is needed to mock some functions of the cart 
+  // a fake cart is needed to mock some functions of the cart
   // component
   const fakeCart: CartItem[] = fakeProductData.map((item) => {
     return {
@@ -77,8 +77,8 @@ describe("cart component", () => {
     const expectedTotal = `$${parseFloat(
       (fakeCart[0].quantity * fakeCart[0].price).toString(),
     ).toFixed(2)}`;
-    // ensuring the first item's total is shown in the page, if the 
-    // first item's total is shown we can expect all item's totals 
+    // ensuring the first item's total is shown in the page, if the
+    // first item's total is shown we can expect all item's totals
     // are shown
     expect(screen.getAllByText(expectedTotal)[0]).toBeInTheDocument();
   });
@@ -121,7 +121,7 @@ describe("cart component", () => {
         wrapper: MemoryRouter,
       },
     );
-    // ensuring the number of remove item buttons equal to the number of items 
+    // ensuring the number of remove item buttons equal to the number of items
     // provided
     expect(screen.getAllByRole("button", { name: /remove item/i }).length).toBe(
       fakeCart.length,

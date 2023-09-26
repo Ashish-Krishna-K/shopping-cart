@@ -52,7 +52,7 @@ describe("checkout page", () => {
     // making sure the user is indicated when cart is empty
     expect(screen.getByText(/your cart is empty/i)).toBeInTheDocument();
     // and confirming if the user is provided with a link to the store page
-    expect(screen.getAllByRole("link", {name: "Store"})).toHaveLength(2);
+    expect(screen.getAllByRole("link", { name: "Store" })).toHaveLength(2);
   });
   it("clicking on buy page shows fake store disclaimer", async () => {
     const user = userEvent.setup();

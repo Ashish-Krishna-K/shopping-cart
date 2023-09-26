@@ -6,7 +6,7 @@ const getHomeDataFromLocalStorage = () => {
   const rawData = window.localStorage.getItem("home");
   if (rawData) {
     const data = JSON.parse(rawData) as LocalProductCache;
-    // If the data was added to localStorage more than 24 hours ago then 
+    // If the data was added to localStorage more than 24 hours ago then
     // return null so fresh data can be fetched from the API
     const hoursDiff = Math.abs(data.storedAt - Date.now()) / 36e5;
     if (hoursDiff > 24) return null;

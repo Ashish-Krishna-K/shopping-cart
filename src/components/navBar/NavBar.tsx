@@ -15,21 +15,19 @@ const NavBar = ({
   const { cart } = useContext(CartContext)!;
   const location = useLocation();
   return (
-    // the conditional classname assignment ensures the cart button is  
+    // the conditional classname assignment ensures the cart button is
     // pushed to the rigt end of the nav bar when cart is open.
     <nav className={`${styles.nav} ${showCart ? styles.alignRight : ""}`}>
       <NavLink to={"/"}>
         <h1 className={styles.siteName}>Fake Store</h1>
       </NavLink>
       <ul className={styles.navList}>
-        {
-          /* 
+        {/* 
             Only rendering the links to home, store, checkout pages 
             when the cart is closed, this is to avoid the user clicking
             on a different page but still showing the cart to the user
             confusing the user.
-          */
-        }
+          */}
         {!showCart && (
           <>
             <li>
@@ -76,12 +74,10 @@ const NavBar = ({
             </li>
           </>
         )}
-        {
-          /* 
+        {/* 
             We don't want to show the open cart button at the checkout screen 
             because that's just redundant.
-          */
-        }
+          */}
         {location.pathname !== "/checkout" && (
           <li>
             <button onClick={handleShowCartClick} className={styles.cartBtn}>

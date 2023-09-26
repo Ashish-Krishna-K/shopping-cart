@@ -56,5 +56,3 @@ export interface fakeProps {
   deleteCartItem: () => void;
   children?: ReactNode | undefined;
 }
-
-

@@ -56,10 +56,10 @@ describe("App/main page of website", () => {
       screen.getAllByRole("button", { name: /add to cart/i }),
     ).toHaveLength(9);
     await user.click(checkoutLink);
-    // checking to see if both the cart is empty disclaimer and a link to 
+    // checking to see if both the cart is empty disclaimer and a link to
     // the store page is rendered which ensures the checkout page is loaded
     expect(screen.getByText(/your cart is empty/i)).toBeInTheDocument();
-    expect(screen.getAllByRole("link", {name: "Store"})).toHaveLength(2);
+    expect(screen.getAllByRole("link", { name: "Store" })).toHaveLength(2);
     await user.click(homeLink);
     // ensuring the welcome message is rendered which confirms the homePage
     // is loaded.

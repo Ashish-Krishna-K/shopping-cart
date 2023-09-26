@@ -7,7 +7,7 @@ import { MemoryRouter } from "react-router-dom";
 import { config } from "react-transition-group";
 
 describe("carousel component", () => {
-  // creating a fake list of products from the fakeProductData 
+  // creating a fake list of products from the fakeProductData
   // exported from testHelpers.
   const carouselList = fakeProductData
     .map((item) => ({
@@ -18,7 +18,7 @@ describe("carousel component", () => {
     .slice(0, 5);
   it("renders the image", async () => {
     render(<Carousel products={carouselList} />, { wrapper: MemoryRouter });
-    // checking if the first item's name is present in the image's alt as a 
+    // checking if the first item's name is present in the image's alt as a
     // way to ensure provided image is rendered
     expect(screen.getByAltText(carouselList[0].title)).toBeInTheDocument();
   });
