@@ -1,3 +1,4 @@
+/* whole component */
 .errorPage {
   min-height: 100svh;
   display: flex;
@@ -6,6 +7,7 @@
   outline: 1px solid black;
 }
 
+/* START container to the elements in the error page */
 .container {
   width: 50%;
   text-align: center;
@@ -16,3 +18,4 @@
 .container h1 {
   color: var(--secondary);
 }
+/* END */

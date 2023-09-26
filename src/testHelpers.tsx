@@ -3,10 +3,8 @@ import App from "./routes/mainLayoutPage/App";
 import HomePage from "./routes/homePage/HomePage";
 import StorePage from "./routes/storePage/StorePage";
 import ProductsDisplay from "./components/products/ProductsDisplay";
-import { ReactNode } from "react";
-import { ApiCategoryData, ApiProductData, CartItem } from "./appTypes";
+import { type ApiCategoryData, type ApiProductData, type fakeProps } from "./appTypes";
 import { CartContext } from "./routes/mainLayoutPage/App";
-import { Mock } from "vitest";
 import CheckoutPage from "./routes/checkoutPage/CheckoutPage";
 import ErrorPage from "./routes/errorPage/ErrorPage";
 
@@ -160,14 +158,6 @@ const checkoutRouter = createMemoryRouter(routes, {
   initialIndex: 1,
 });
 
-interface fakeProps {
-  cart: CartItem[];
-  addCartItem: Mock<[item: any], number> | (() => void);
-  updateCartItem: () => void;
-  deleteCartItem: () => void;
-  children?: ReactNode | undefined;
-}
-
 const FakeContextProvider = ({
   cart,
   addCartItem,
@@ -185,6 +175,7 @@ const FakeContextProvider = ({
 };
 
 export {
+  fakeCategoryData,
   allRouter,
   shopRouter,
   checkoutRouter,

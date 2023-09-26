@@ -1,17 +1,20 @@
+/* The whole component */
 .carousel {
   position: relative;
   margin: 3vh 0;
 }
 
+/* The img tag */
 .productImg {
   display: block;
   margin: 0 auto;
   width: 50%;
-  height: 55svh;
+  height: 50svh;
   cursor: pointer;
   mix-blend-mode: multiply;
 }
 
+/* START The transition states */
 .productImgAppear {
   translate: -150%;
   opacity: 0;
@@ -57,7 +60,9 @@
   translate: 150%;
   opacity: 0;
 }
+/* END */
 
+/* All of the small indicators at the bottom */
 .indicators {
   display: flex;
   align-items: center;
@@ -66,6 +71,7 @@
   margin-top: 5vh;
 }
 
+/* Individual indicator div */
 .imgIndicator {
   width: 10px;
   min-height: 10px;
@@ -73,6 +79,7 @@
   border-radius: 100px;
 }
 
+/* Showing the current img indicator with slightly different style */
 .currentImg {
   composes: imgIndicator;
   background-color: var(--accent);

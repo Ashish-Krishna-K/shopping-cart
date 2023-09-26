@@ -1,9 +1,11 @@
+/* whole component */
 .homePage {
   overflow-y: auto;
   height: 100%;
   overflow-x: hidden;
 }
 
+/* START (idk what to call it lol) welcome section  */
 .homeHeader {
   display: flex;
   flex-direction: column;
@@ -13,15 +15,19 @@
 .homeHeader > p > a {
   margin: 0 1vw;
 }
+/* END */
 
+/* Link to current page */
 .activeLink {
-  color: green;
+  color: var(--accent);
 }
 
+/* link to next page before it's loaded */
 .pendingLink {
-  color: yellow;
+  color: var(--secondary);
 }
 
+/* link to shop page */
 .cta {
   background-color: var(--accent);
   color: var(--primary-main);

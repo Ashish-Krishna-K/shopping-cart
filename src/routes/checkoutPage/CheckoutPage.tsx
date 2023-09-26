@@ -11,7 +11,11 @@ const CheckoutPage = () => {
   const navigation = useNavigation();
   const { cart, deleteCartItem } = useContext(CartContext)!;
   const [isBuyClicked, setIsBuyClicked] = useState<boolean>(false);
+  // if the user clicks on store it's not cached so there will be a small delay
+  // before the page is displayed, hence showing a loadingspinner
   if (navigation.state === "loading") return <LoadingSpinner></LoadingSpinner>;
+  // ensuring the user is informed when the cart is empty, and providing a link
+  // to the store page in that case.
   if (cart.length < 1)
     return (
       <section className={styles.emptyCart}>
@@ -30,9 +34,10 @@ const CheckoutPage = () => {
         </p>
       </section>
     );
+  // handling the case when the user clicks on buy
   if (isBuyClicked)
     return (
-      <section className={styles.disclaimer}>
+      <section className={styles.nonEmptyCart}>
         <h2>
           Oops! This is a fake store &#40;did you forget?&#41; you can't buy
           anything here!
@@ -65,6 +70,7 @@ const CheckoutPage = () => {
                 <p>
                   Item Total: $
                   <strong>
+                    {/* Ensuring the total has no more than 2 decimal places */}
                     {parseFloat(
                       (cartItem.quantity * cartItem.price).toString(),
                     ).toFixed(2)}
@@ -78,6 +84,7 @@ const CheckoutPage = () => {
                   deleteCartItem(cartItem.id);
                 }}
               >
+                {/* we want to make sure screen readers read out what the button is for */}
                 <span className={styles.visuallyHidden}>remove item</span>
                 <Icon path={mdiDelete} size={2} aria-hidden />
               </button>

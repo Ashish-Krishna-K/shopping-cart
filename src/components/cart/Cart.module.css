@@ -1,3 +1,4 @@
+/* The whole cart component */
 .cart {
   position: absolute;
   top: 0;
@@ -10,18 +11,21 @@
   padding: 0 1vw;
 }
 
+/* Styling for when cart is empty */
 .emptyCart {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* When cart is not empty */
 .nonEmptyCart {
   height: 100%;
   display: grid;
   grid-template-rows: 1fr auto;
 }
 
+/* The list of items in cart */
 .cartItems {
   display: flex;
   flex-direction: column;
@@ -30,6 +34,7 @@
   padding: 0;
 }
 
+/* START Individual item in cart */
 .product {
   min-height: 15vh;
   width: 60%;
@@ -49,6 +54,15 @@
   height: auto;
 }
 
+.removeBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--secondary);
+}
+/* END */
+
+/* START The cart total section at the bottom */
 .cartTotal {
   display: grid;
   align-items: center;
@@ -59,19 +73,15 @@
 .cartTotal p {
   margin-bottom: 1vh;
 }
+/* END */
 
+/* Hiding some text elements so it's not visible to visual users but readable by screen readers */
 .visuallyHidden {
   position: absolute;
   opacity: 0;
 }
 
-.removeBtn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--secondary);
-}
-
+/* The proceed to checkout button */
 .checkout {
   background-color: var(--secondary);
   color: var(--primary-main);

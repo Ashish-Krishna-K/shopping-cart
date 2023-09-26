@@ -1,12 +1,14 @@
 import { describe, expect, it, vi } from "vitest";
 import { fakeProductData, FakeContextProvider } from "../../testHelpers";
-import { CartItem } from "../../appTypes";
+import { type CartItem } from "../../appTypes";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import Cart from "./Cart";
 import userEvent from "@testing-library/user-event";
 
 describe("cart component", () => {
+  // a fake cart is needed to mock some functions of the cart 
+  // component
   const fakeCart: CartItem[] = fakeProductData.map((item) => {
     return {
       ...item,
@@ -18,6 +20,7 @@ describe("cart component", () => {
   const deleteCartItem = vi.fn();
   it("renders a cart display", async () => {
     render(
+      // providing the fakecart details as a fake context
       <FakeContextProvider
         cart={fakeCart}
         addCartItem={addCartItem}
@@ -26,11 +29,16 @@ describe("cart component", () => {
       >
         <Cart toggleCart={vi.fn()} />
       </FakeContextProvider>,
+      // wrapping the component in a memory router as some react-router-dom
+      // hooks only work inside a route component
       {
         wrapper: MemoryRouter,
       },
     );
+    // checking if the number of list items rendered is equal to the number
+    // of items provided
     expect(screen.getAllByRole("listitem").length).toBe(fakeCart.length);
+    // checking if the first item's title is rendered in the document
     expect(screen.getByText(fakeCart[0].title)).toBeInTheDocument();
   });
   it("renders cart is empty when cart is empty", async () => {
@@ -48,6 +56,7 @@ describe("cart component", () => {
         wrapper: MemoryRouter,
       },
     );
+    // testing if the user is indicated that the cart is empty
     expect(screen.getByText(/cart is empty/i)).toBeInTheDocument();
   });
   it("renders the item total price correctly", async () => {
@@ -64,9 +73,13 @@ describe("cart component", () => {
         wrapper: MemoryRouter,
       },
     );
+    // ensuring only decimals upto 2 digits is shown
     const expectedTotal = `$${parseFloat(
       (fakeCart[0].quantity * fakeCart[0].price).toString(),
     ).toFixed(2)}`;
+    // ensuring the first item's total is shown in the page, if the 
+    // first item's total is shown we can expect all item's totals 
+    // are shown
     expect(screen.getAllByText(expectedTotal)[0]).toBeInTheDocument();
   });
   it("renders the cart total price correctly", async () => {
@@ -89,6 +102,7 @@ describe("cart component", () => {
         .reduce((a, b) => a + b, 0)
         .toString(),
     ).toFixed(2)}`;
+    // testing if the cart total is shown in the page
     expect(
       screen.getByText(`Cart total: ${expectedTotal}`),
     ).toBeInTheDocument();
@@ -107,6 +121,8 @@ describe("cart component", () => {
         wrapper: MemoryRouter,
       },
     );
+    // ensuring the number of remove item buttons equal to the number of items 
+    // provided
     expect(screen.getAllByRole("button", { name: /remove item/i }).length).toBe(
       fakeCart.length,
     );
@@ -130,7 +146,9 @@ describe("cart component", () => {
       name: /remove item/i,
     })[0];
     await user.click(deleteButton);
+    // ensuring clicking the delete button calls the delete function
     expect(deleteCartItem).toHaveBeenCalledOnce();
+    // and confirming the id passed to the delete function is correct
     expect(deleteCartItem).toHaveBeenCalledWith(fakeCart[0].id);
   });
 });

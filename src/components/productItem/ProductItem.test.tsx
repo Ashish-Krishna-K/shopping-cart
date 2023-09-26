@@ -22,6 +22,8 @@ describe("product item component", () => {
         wrapper: MemoryRouter,
       },
     );
+    // ensuring the product's title is shown, which confirms the product
+    // itself is rendered
     expect(screen.getByText(fakeProductItem1.title)).toBeInTheDocument();
   });
   it("adding new item call the correct function", async () => {
@@ -45,6 +47,7 @@ describe("product item component", () => {
     await user.click(addItemButton);
     const addButton = screen.getByRole("button", { name: "Add" });
     await user.click(addButton);
+    // ensuring the correct function is called.
     expect(addCartItem).toHaveBeenCalledOnce();
   });
   it("updating an item calls the correct function", async () => {
@@ -54,6 +57,7 @@ describe("product item component", () => {
     const addCartItem = vi.fn((item) => fakeCart.push(item));
     const updateCartItem = vi.fn();
     const deleteCartItem = vi.fn();
+    // To make sure changes were actually applied.
     const updatedFakeProductItem1: CartItem = {
       id: 0,
       title: "fake item",
@@ -76,10 +80,12 @@ describe("product item component", () => {
         wrapper: MemoryRouter,
       },
     );
+    // adding the item to the cart for the first time
     const addItemButton1 = screen.getByRole("button", { name: "Add to cart" });
     await user.click(addItemButton1);
     const addButton1 = screen.getByRole("button", { name: "Add" });
     await user.click(addButton1);
+    // increasing the quantity added.
     const addItemButton2 = screen.getByRole("button", { name: "Add to cart" });
     await user.click(addItemButton2);
     const inputElem = screen.getByLabelText(
@@ -89,8 +95,11 @@ describe("product item component", () => {
     await user.type(inputElem, "2");
     const addButton2 = screen.getByRole("button", { name: "Add" });
     await user.click(addButton2);
+    // ensuring the correct function is called when the case is of updating
     expect(updateCartItem).toHaveBeenCalledOnce();
+    // and confirming the correct id is provided to the called function
     expect(updateCartItem.mock.calls[0][0].id).toBe(updatedFakeProductItem1.id);
+    // while also confirming the new quantity is provided as expected.
     expect(updateCartItem.mock.calls[0][0].quantity).toBe(
       updatedFakeProductItem1.quantity,
     );

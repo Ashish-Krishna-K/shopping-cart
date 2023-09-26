@@ -1,27 +1,18 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import FilterSidebar from "./FilterSidebar";
-import { ApiCategoryData } from "../../appTypes";
 import { MemoryRouter } from "react-router-dom";
+import { fakeCategoryData } from "../../testHelpers";
 
 describe("Sidebar for filtering categories", () => {
   it("renders a list of categories", () => {
-    const fakeData: ApiCategoryData[] = [
-      {
-        id: "some-id1",
-        name: "some-category-1",
-      },
-      {
-        id: "some-id2",
-        name: "some-category-2",
-      },
-      {
-        id: "some-id3",
-        name: "some-category-3",
-      },
-    ];
-    render(<FilterSidebar data={fakeData} />, { wrapper: MemoryRouter });
-    expect(screen.getByText(/some-category-1/i)).toBeInTheDocument();
-    expect(screen.getAllByRole("link").length).toBe(fakeData.length + 1);
+    render(<FilterSidebar data={fakeCategoryData} />, { wrapper: MemoryRouter });
+    // Ensuring the first category is rendered
+    expect(screen.getByText(/fakeCategory1/i)).toBeInTheDocument();
+    // and confirming if the number of categories rendered is equal to the 
+    // number of categories provided.
+    // Plus one because the component has a default "all" category regardless of 
+    // the categories passed in.
+    expect(screen.getAllByRole("link").length).toBe(fakeCategoryData.length + 1);
   });
 });

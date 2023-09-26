@@ -52,6 +52,11 @@ const App = () => {
         </main>
         <footer className={styles.footer}>
           <p>
+            Store Data by {" "}
+            <a href="https://fakestoreapi.com/">Fake store</a>{" "}
+            API
+          </p>
+          <p>
             Project by{" "}
             <a
               href="https://github.com/Ashish-Krishna-K"

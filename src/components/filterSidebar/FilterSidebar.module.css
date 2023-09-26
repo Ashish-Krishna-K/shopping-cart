@@ -1,3 +1,4 @@
+/* The whole component(forgive me for the naming inconsistency */
 .categorySelector {
   display: flex;
   flex-direction: column;
@@ -8,6 +9,7 @@
   box-shadow: 1px 0px 5px 2px var(--accent);
 }
 
+/* Individual category item */
 .categorySelector > li {
   margin: 2vh 0;
   min-width: 15vw;
@@ -16,14 +18,17 @@
   border-radius: 5px;
 }
 
+/* applying background color for whole list item if it has active link */
 .categorySelector > li:has(a.activeLink) {
   background-color: var(--accent);
 }
 
+/* current active link */
 .activeLink {
   color: var(--primary-main);
 }
 
+/* for the pending state between the link is pressed till it's loaded */
 .pendingLink {
-  color: yellow;
+  color: var(--secondary);
 }

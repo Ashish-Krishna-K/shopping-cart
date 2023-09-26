@@ -6,6 +6,8 @@ const ErrorPage = () => {
   console.error(error);
   let errorMsg: string;
 
+  // the error thrown by the loader function is 
+  // of type 'unkown' hence narrowing the type down
   if (isRouteErrorResponse(error)) {
     errorMsg = error.statusText;
   } else if (error instanceof Error) {

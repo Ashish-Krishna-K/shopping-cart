@@ -1,5 +1,7 @@
 import { LoaderFunction } from "react-router-dom";
-import { LocalCategoryCache } from "../../appTypes";
+import { type LocalCategoryCache } from "../../appTypes";
+
+// same as the homePageLoader.tsx
 
 const getCategoryDataFromLocalStorage = () => {
   const rawData = window.localStorage.getItem("categories");

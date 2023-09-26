@@ -1,3 +1,4 @@
+/* START The whole component */
 .checkoutPage {
   height: 100%;
   overflow: auto;
@@ -11,7 +12,9 @@
 .checkoutPage ul {
   padding: 0;
 }
+/* END */
 
+/* If the cart is empty */
 .emptyCart {
   height: 60%;
   display: flex;
@@ -20,12 +23,19 @@
   justify-content: center;
 }
 
+/* START If the cart is not empty */
 .nonEmptyCart {
   display: grid;
   grid-template-columns: 1fr auto;
   height: 100%;
 }
 
+.nonEmptyCart ::-webkit-scrollbar {
+  width: 0.5vw;
+}
+/* END */
+
+/* The list of items in the cart */
 .cartItems {
   display: flex;
   flex-direction: column;
@@ -33,6 +43,7 @@
   overflow: auto;
 }
 
+/* Individual cart item */
 .productItem {
   width: 60%;
   margin: 0 auto;
@@ -45,6 +56,7 @@
   border-radius: 5px;
 }
 
+/* START The cart total display */
 .cartTotal {
   padding: 1vh 2vw;
   display: flex;
@@ -54,35 +66,7 @@
   box-shadow: -1px 0px 5px 2px var(--accent);
 }
 
-.nonEmptyCart ::-webkit-scrollbar {
-  width: 0.5vw;
-}
-
-.disclaimer {
-  composes: emptyCart;
-}
-
-.activeLink {
-  color: green;
-}
-
-.pendingLink {
-  color: yellow;
-}
-
-.visuallyHidden {
-  opacity: 0;
-  position: absolute;
-}
-
-.removeBtn {
-  background: none;
-  border: none;
-  color: var(--accent);
-  cursor: pointer;
-}
-
-.cartTotal > button {
+.cartTotal>button {
   padding: 1vmax 2vmax;
   border-radius: 5px;
   background-color: var(--accent);
@@ -90,12 +74,38 @@
   border: none;
   cursor: pointer;
 }
+/* END */
 
+/* The back button when user clicks on buy */
 .backBtn {
   padding: 1vmax 2vmax;
   border-radius: 5px;
   border: none;
   background-color: var(--secondary);
   color: var(--primary-main);
+  cursor: pointer;
+}
+
+/* Link to current page */
+.activeLink {
+  color: var(--accent);
+}
+
+/* Link to next page clicked before it's loaded */
+.pendingLink {
+  color: var(--secondary);
+}
+
+/* Visually hiding button labels so it's read by screen readers */
+.visuallyHidden {
+  opacity: 0;
+  position: absolute;
+}
+
+/* remove cart item button */
+.removeBtn {
+  background: none;
+  border: none;
+  color: var(--accent);
   cursor: pointer;
 }

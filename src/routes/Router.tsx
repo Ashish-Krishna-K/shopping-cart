@@ -8,7 +8,7 @@ import ProductsDisplay from "../components/products/ProductsDisplay";
 import { loader as productsLoader } from "../components/products/ProductsDisplayLoader";
 import CheckoutPage from "./checkoutPage/CheckoutPage";
 import { useState } from "react";
-import { CartItem } from "../appTypes";
+import { type CartItem } from "../appTypes";
 import { CartContext } from "../routes/mainLayoutPage/App";
 import { PropsWithChildren } from "react";
 import ErrorPage from "./errorPage/ErrorPage";
@@ -16,9 +16,11 @@ import ErrorPage from "./errorPage/ErrorPage";
 const ContextProvider = ({ children }: PropsWithChildren) => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const addCartItem = (newCartItem: CartItem) => {
+    // simply adding the provided item to the array
     setCart([...cart, newCartItem]);
   };
   const updateCartItem = (newCartItem: CartItem) => {
+    // if item already exists in the cart replace it with provided item
     setCart(
       cart.map((item) => (item.id === newCartItem.id ? newCartItem : item)),
     );

@@ -8,6 +8,7 @@ const StorePage = () => {
   const { categories } = useLoaderData() as { categories: ApiCategoryData[] };
   const navigation = useNavigation();
 
+  // ensuring a loading spinner is shown to the user when they click on a link
   if (navigation.state === "loading") return <LoadingSpinner></LoadingSpinner>;
 
   return (

@@ -13,6 +13,7 @@ describe("checkout page", () => {
   const fakeCart: CartItem[] = fakeProductData.map((item) => {
     return {
       ...item,
+      // adding a random value for quantity
       quantity: Math.floor(Math.random() * 10) + 1,
     };
   });
@@ -30,6 +31,8 @@ describe("checkout page", () => {
         <RouterProvider router={checkoutRouter} />
       </FakeContextProvider>,
     );
+    // since the product title is a h3 element checking if the number of
+    // h3 elements matches the number of cart items provided
     expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(
       fakeCart.length,
     );
@@ -46,7 +49,10 @@ describe("checkout page", () => {
         <RouterProvider router={checkoutRouter} />
       </FakeContextProvider>,
     );
+    // making sure the user is indicated when cart is empty
     expect(screen.getByText(/your cart is empty/i)).toBeInTheDocument();
+    // and confirming if the user is provided with a link to the store page
+    expect(screen.getAllByRole("link", {name: "Store"})).toHaveLength(2);
   });
   it("clicking on buy page shows fake store disclaimer", async () => {
     const user = userEvent.setup();
@@ -62,11 +68,14 @@ describe("checkout page", () => {
     );
     const buyBtn = screen.getByRole("button", { name: /buy/i });
     await user.click(buyBtn);
+    // ensuring the user is reminded that it's a fake store when user clicks on buy
+    // button
     expect(
       screen.getByText(
         "Oops! This is a fake store (did you forget?) you can't buy anything here!",
       ),
     ).toBeInTheDocument();
+    // and confirming if the user is provided a back button to go back
     expect(screen.getByRole("button", { name: /back/i })).toBeInTheDocument();
   });
   it("clicking on delete item button calls the correct function with correct id", async () => {
@@ -85,7 +94,9 @@ describe("checkout page", () => {
       name: /remove item/i,
     })[0];
     await user.click(deleteBtn);
+    // ensuring the delete button press calls the correct function
     expect(deleteCartItem).toHaveBeenCalledOnce();
+    // and confirming the provided id is correct
     expect(deleteCartItem).toHaveBeenCalledWith(fakeCart[0].id);
   });
 });

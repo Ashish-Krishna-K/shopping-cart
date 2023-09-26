@@ -11,26 +11,23 @@ body,
   font-family: "Poppins", sans-serif;
 }
 
+/* all ul elements */
 ul {
   list-style: none;
 }
 
+/* all img elements */
 img {
   width: 500px;
   height: auto;
 }
 
+/* START all button and link elements */
 button,
 a {
   font-family: "Staatliches", cursive;
   font-size: 1.1rem;
   font-weight: 900;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
 }
 
 button:hover {
@@ -40,6 +37,14 @@ button:hover {
 button:active {
   scale: 0.9;
 }
+/* END */
+
+/* all elements */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 :root {
   --primary-main: rgb(255, 245, 224);
@@ -48,6 +53,7 @@ button:active {
   --accent: rgb(20, 30, 70);
 }
 
+/* START the scrollbar */
 ::-webkit-scrollbar {
   width: auto;
 }
@@ -70,3 +76,4 @@ button:active {
 ::-webkit-scrollbar-button {
   display: none;
 }
+/* END */

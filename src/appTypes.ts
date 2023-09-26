@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ReactNode } from "react";
+import { Mock } from "vitest";
+
 export interface ApiProductData {
   id: number;
   title: string;
@@ -44,3 +48,13 @@ export interface CartContextType {
 }
 
 export type CarouselPropsType = Pick<ApiProductData, "id" | "title" | "image">;
+
+export interface fakeProps {
+  cart: CartItem[];
+  addCartItem: Mock<[item: any], number> | (() => void);
+  updateCartItem: () => void;
+  deleteCartItem: () => void;
+  children?: ReactNode | undefined;
+}
+
+

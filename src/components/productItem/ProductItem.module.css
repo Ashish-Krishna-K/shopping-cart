@@ -1,3 +1,4 @@
+/* START The whole component */
 .productItem {
   padding: 1vh 1vw;
   display: grid;
@@ -13,6 +14,16 @@
   mix-blend-mode: normal;
 }
 
+.productItem ::-webkit-scrollbar {
+  width: 5px;
+}
+
+.productItem ::-webkit-scrollbar-thumb {
+  background-color: var(--accent);
+}
+/* END */
+
+/* START The add to cart and buy now buttons */
 .controls {
   display: flex;
   gap: 1vw;
@@ -26,13 +37,16 @@
   border-radius: 5px;
   cursor: pointer;
 }
+/* END */
 
+/* Add to cart button */
 .addToCart {
   display: grid;
   gap: 1vw;
   align-items: center;
 }
 
+/* START Add to cart form */
 .addForm {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -56,7 +70,9 @@
   color: var(--primary-main);
   cursor: pointer;
 }
+/* END */
 
+/* The name of the product */
 .title {
   height: 5vh;
   text-align: center;
@@ -64,6 +80,7 @@
   font-family: "Kaushan Script", cursive;
 }
 
+/* Product description */
 .description {
   height: 12vh;
   overflow: auto;
@@ -71,10 +88,9 @@
   text-wrap: balance;
 }
 
-.productItem ::-webkit-scrollbar {
-  width: 5px;
-}
-
-.productItem ::-webkit-scrollbar-thumb {
-  background-color: var(--accent);
+/* visually hiding the label so it's only read by screen readers */
+.visuallyHidden {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
 }

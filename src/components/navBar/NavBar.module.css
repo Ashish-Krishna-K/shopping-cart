@@ -1,9 +1,18 @@
+/* START The whole component */
 .nav {
   display: flex;
   align-items: center;
   padding: 0 2vw;
 }
 
+.nav a {
+  color: var(--primary-main);
+  padding: 1.5vmin;
+  border-radius: 5px;
+}
+/* END */
+
+/* START The heading */
 .siteName {
   font-family: "Lobster", cursive;
   font-size: 2.5rem;
@@ -14,13 +23,9 @@
 a:has(.siteName) {
   text-decoration: none;
 }
+/* END */
 
-.nav a {
-  color: var(--primary-main);
-  padding: 1.5vmin;
-  border-radius: 5px;
-}
-
+/* START The list containing the links */
 .navList {
   flex: 1;
   list-style: none;
@@ -31,6 +36,12 @@ a:has(.siteName) {
   padding: 0;
 }
 
+.alignRight {
+  justify-content: flex-end;
+}
+/* END */
+
+/* The toggle cart button */
 .cartBtn {
   position: relative;
   padding: 1vmin;
@@ -42,6 +53,7 @@ a:has(.siteName) {
   justify-self: flex-end;
 }
 
+/* The indicator showing the number of items in the cart */
 .cartIndicator {
   background-color: var(--accent);
   color: var(--primary-main);
@@ -52,19 +64,18 @@ a:has(.siteName) {
   border-radius: 50px;
 }
 
-.alignRight {
-  justify-content: flex-end;
-}
-
+/* Link to current page */
 .activeLink {
   color: var(--primary-main) !important;
   background-color: var(--accent);
 }
 
+/* Link to page clicked but before the page loads */
 .pendingLink {
   color: var(--accent) !important;
 }
 
+/* Visually hiding the button name so it can be read by screen readers */
 .visuallyHidden {
   opacity: 0;
   position: absolute;

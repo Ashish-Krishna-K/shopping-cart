@@ -17,6 +17,7 @@ const Cart = forwardRef(function Cart(
   const { cart, deleteCartItem } = useContext(CartContext)!;
   const isCartEmpty = cart.length < 1;
   return (
+    // A transition is added to the cart opening and closing hence the ref.
     <section className={styles.cart} ref={ref}>
       <div className={isCartEmpty ? styles.emptyCart : styles.nonEmptyCart}>
         {isCartEmpty ? (
@@ -38,6 +39,7 @@ const Cart = forwardRef(function Cart(
                     <p>
                       Item total:{" "}
                       <strong>
+                        {/* Ensuring the total value is only showed with 2 decimal places */}
                         $
                         {parseFloat(
                           (cartItem.quantity * cartItem.price).toString(),
@@ -74,6 +76,8 @@ const Cart = forwardRef(function Cart(
               <button
                 className={styles.checkout}
                 onClick={() => {
+                  // without the toggle cart(passed in by the parent) the cart
+                  // remains visible even after navigating to the checkout.
                   toggleCart();
                   navigate("/checkout");
                 }}
