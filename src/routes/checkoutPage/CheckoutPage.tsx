@@ -37,7 +37,7 @@ const CheckoutPage = () => {
   // handling the case when the user clicks on buy
   if (isBuyClicked)
     return (
-      <section className={styles.nonEmptyCart}>
+      <section className={styles.disclaimer}>
         <h2>
           Oops! This is a fake store &#40;did you forget?&#41; you can't buy
           anything here!

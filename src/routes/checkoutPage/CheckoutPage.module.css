@@ -109,3 +109,11 @@
   color: var(--accent);
   cursor: pointer;
 }
+
+/* The page when user clicks on buy */
+.disclaimer {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  padding-top: 10vh;
+}
