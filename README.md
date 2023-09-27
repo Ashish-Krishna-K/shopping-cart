@@ -1,11 +1,11 @@
 # Shopping Cart
 
-[Live Demo]()
+[Live Demo](https://shopping-cart-livid-theta.vercel.app/)
 
-A basic e-commerce website with a shopping cart feature built as part of [The Odin Project's]() React course. The goal of the project is to practice using
+A basic e-commerce website with a shopping cart feature built as part of [The Odin Project's](https://www.theodinproject.com/dashboard) React course. The goal of the project is to practice using
 the _react-testing-library_ for unit testing react components and to use _react-router-dom_ for client side routing.
 
-_This project was originally built during my first run of The Odin Project as seen in the [old branch](). During my second run I'm reworkin previous projects and this time I'm using TypeScript as a practice._
+_This project was originally built during my first run of The Odin Project. During my second run I'm reworkin previous projects and this time I'm using TypeScript as a practice._
 
 ## The UI
 
